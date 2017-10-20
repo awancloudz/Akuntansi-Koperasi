@@ -28,9 +28,9 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('transaksiumum','TransaksiumumController');
 
     //CONTOH
-    /*
-    Route::get('produk/cari','ProdukController@cari');
-    Route::get('produk/caribarcode','ProdukController@caribarcode');
+    
+    Route::get('nasabah/cari','NasabahController@cari');
+    /*Route::get('produk/caribarcode','ProdukController@caribarcode');
     Route::resource('produk','ProdukController');
     Route::get('kategori/{cat}',[
     'uses' => 'ProdukController@kategori',
