@@ -8,6 +8,7 @@
 @endif
 
 {!! Form::hidden('simpanan_pokok', 0) !!}
+{!! Form::hidden('status', 'debit') !!}
 {{-- Kode Transaksi --}}
 @if($errors->any())
 <div class="form-group {{ $errors->has('kodetransaksi') ? 'has-error' : 'has-success' }}"></div>

@@ -83,7 +83,14 @@ class TransaksisimpananController extends Controller
      */
     public function edit(TransaksiSimpanan $transaksisimpanan)
     {
-        return view('transaksisimpanan.edit', compact('transaksisimpanan'));
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $nasabah = Nasabah::all();
+        $daftarnasabah = $nasabah->where('id_users',$iduser);
+        $anggota = Keanggotaan::all();
+        $daftarkeanggotaan = $anggota->where('id_users',$iduser);
+        return view('transaksisimpanan.edit', compact('transaksisimpanan','daftarkeanggotaan','daftarnasabah'));
     }
 
     /**
