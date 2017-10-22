@@ -36,7 +36,7 @@
 				<td>{{ $pinjaman->nominal_angsuran }}</td>	
 				<td>
 					<div class="box-button">
-					{{ link_to('transaksipinjaman/bayar/' . $pinjaman->id , 'Detail Angsuran', ['class' => 'btn btn-success btn-sm']) }}
+					{{ link_to('transaksipinjaman/angsuran/' . $pinjaman->id , 'Detail Angsuran', ['class' => 'btn btn-success btn-sm']) }}
 					</div>
 					<div class="box-button">
 					{{ link_to('transaksipinjaman/' . $pinjaman->id . '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}
