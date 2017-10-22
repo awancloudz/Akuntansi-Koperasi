@@ -22,6 +22,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('akun','AkunController');
     Route::resource('keanggotaan','KeanggotaanController');
     Route::resource('nasabah','NasabahController');
+    Route::get('nasabah/simpanan/{nasabah}','NasabahController@simpanan');
+    Route::get('nasabah/pinjaman/{nasabah}','NasabahController@pinjaman');
     Route::resource('transaksisimpanan','TransaksisimpananController');
     Route::resource('transaksipenarikan','TransaksipenarikanController');
     Route::resource('transaksipinjaman','TransaksipinjamanController');

@@ -11,6 +11,8 @@ use App\Nasabah;
 use App\Keanggotaan;
 use Session;
 use Auth;
+use App\TransaksiSimpanan;
+use App\TransaksiPinjaman;
 //use PDF;
 //use DB;
 //use Excel;
@@ -68,7 +70,28 @@ class NasabahController extends Controller
     {
         return view('nasabah.show',compact('nasabah'));
     }
+    
+    public function simpanan(Nasabah $nasabah)
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = TransaksiSimpanan::all();
+        $daftarsimpanan = $daftar->where('id_nasabah',$nasabah->id,'id_users',$iduser);
+        $jumlahsimpanan = $daftarsimpanan->count();
+        return view('nasabah.simpanan',compact('nasabah','daftarsimpanan','jumlahsimpanan'));
+    }
 
+    public function pinjaman(Nasabah $nasabah)
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = TransaksiPinjaman::all();
+        $daftarpinjaman = $daftar->where('id_nasabah',$nasabah->id,'id_users',$iduser);
+        $jumlahpinjaman = $daftarpinjaman->count();
+        return view('nasabah.pinjaman',compact('nasabah','daftarpinjaman','jumlahpinjaman'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

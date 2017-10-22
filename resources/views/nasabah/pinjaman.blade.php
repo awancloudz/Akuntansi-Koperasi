@@ -2,12 +2,11 @@
 
 @section('main')
 <div id="transaksipinjaman" class="panel panel-default">
-	<div class="panel-heading"><b><h4>Data Transaksi Pinjaman</h4></b></div>
+	<div class="panel-heading"><b><h4>Data Transaksi Pinjaman - {{ $nasabah->nama }}</h4></b></div>
 	<div class="panel-body">
-	@include('_partial.flash_message')
-	@include('transaksipinjaman.form_pencarian')
 	<div class="tombol-nav">
 		{{ link_to('transaksipinjaman/create','Tambah Pinjaman',['class' => 'btn btn-primary']) }}
+        {{ link_to('transaksipinjaman/cetak','Cetak Pinjaman',['class' => 'btn btn-success']) }}
 	</div><br><br><br>
 	@if (count($daftarpinjaman) > 0)
 	<table class="table">
@@ -15,11 +14,10 @@
 			<tr>
 				<th>Kode Transaksi</th>
 				<th>Id Akun</th>
-				<th>Nama Nasabah</th>
 				<th>Tanggal</th>
 				<th>Nominal Pinjam</th>	
 				<th>Kali Angsuran</th>
-				<th>Nominal Angsuran</th>	
+				<th>Nominal Angsuran</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -29,22 +27,13 @@
 			<tr>
 				<td>{{ $pinjaman->kodetransaksi }}</td>
 				<td>{{ $pinjaman->akun->nama_akun }}</td>
-				<td>{{ $pinjaman->nasabah->nama }}</td>
 				<td>{{ $pinjaman->tanggal }}</td>
 				<td>{{ $pinjaman->nominal_pinjam }}</td>
 				<td>{{ $pinjaman->kali_angsuran }}</td>	
 				<td>{{ $pinjaman->nominal_angsuran }}</td>	
 				<td>
 					<div class="box-button">
-					{{ link_to('transaksipinjaman/bayar/' . $pinjaman->id , 'Detail Angsuran', ['class' => 'btn btn-success btn-sm']) }}
-					</div>
-					<div class="box-button">
-					{{ link_to('transaksipinjaman/' . $pinjaman->id . '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}
-					</div>
-					<div class="box-button">
-					{!! Form::open(['method' => 'DELETE', 'action' => ['TransaksipinjamanController@destroy',$pinjaman->id]]) !!}
-					{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm'])!!}
-					{!! Form::close()!!}
+					{{ link_to('transaksipinjaman/bayar/' . $pinjaman->id , 'Detail Angsuran', ['class' => 'btn btn-warning btn-sm']) }}
 					</div>
 				</td>
 			</tr>
