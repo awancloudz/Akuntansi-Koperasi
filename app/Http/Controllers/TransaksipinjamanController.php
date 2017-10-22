@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\TransaksiPinjamanRequest;
 
 use App\TransaksiPinjaman;
+use App\DetailAngsuran;
 use App\Akun;
 use App\Nasabah;
 use Session;
@@ -52,6 +53,26 @@ class TransaksipinjamanController extends Controller
         $input = $request->all();
         //Simpan Data Transaksi
         $transaksipinjaman = TransaksiPinjaman::create($input);
+        //Deklarasi Variabel
+        $saldoawal = $input->request('nominal_pinjam');
+        $kali = $input->request('kali_angsuran');
+        $persentase = $keanggotaan->bunga_pinjaman; //Cek
+        $angsuran = $saldoawal / $kali;
+        $jasa = 0;
+        $totalbayar = 0;
+        //Perulangan
+        $detail_angsuran = new DetailAngsuran;
+        for($i=0; $i <= $kali; $i++){
+            $jasa = $saldoawal * $persentase;
+            $totalbayar = $angsuran + $jasa;
+            $saldoawal = $saldoawal - $angsuran;
+            //Input ke database
+            $detail_angsuran->jasa_uang = $jasa;
+            $detail_angsuran->angsuran = $angsuran;
+            $detail_angsuran->total_bayar = $totalbayar;
+            $detail_angsuran->saldo = $saldoawal;
+            $detail_angsuran->save($detail_angsuran);
+        }
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         return redirect('transaksipinjaman');
     }
