@@ -21,6 +21,7 @@ class CreateTableTransaksiSimpanan extends Migration
             $table->enum('jenis_simpanan',['pokok','sukarela']);
             $table->double('nominal_simpan');
             $table->integer('id_users')->unsigned();
+            $table->enum('status',['debit','kredit']);
             $table->timestamps();
         });
     }

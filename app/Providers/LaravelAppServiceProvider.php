@@ -31,6 +31,9 @@ class LaravelAppServiceProvider extends ServiceProvider
         if(Request::segment(1) == 'transaksisimpanan'){
             $halaman = 'transaksisimpanan';
         }
+        if(Request::segment(1) == 'transaksipenarikan'){
+            $halaman = 'transaksipenarikan';
+        }
         if(Request::segment(1) == 'transaksipinjaman'){
             $halaman = 'transaksipinjaman';
         }

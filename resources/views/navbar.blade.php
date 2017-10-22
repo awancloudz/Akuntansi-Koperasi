@@ -53,6 +53,12 @@
 					@else
 					<li><a href="{{ url('transaksisimpanan') }}">Simpanan</a></li>
 					@endif
+					@if (!empty($halaman) && $halaman == 'transaksipenarikan')
+					<li class="active"><a href="{{ url('transaksipenarikan') }}">Penarikan</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('transaksipenarikan') }}">Penarikan</a></li>
+					@endif
 					@if (!empty($halaman) && $halaman == 'transaksipinjaman')
 					<li class="active"><a href="{{ url('transaksipinjaman') }}">Pinjaman</a>
 					<span class="sr-only">(current)</span></li>
