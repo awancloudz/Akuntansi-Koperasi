@@ -24,6 +24,13 @@ class FormSimpananServiceProvider extends ServiceProvider
             $view->with('list_nasabah', Nasabah::where('id_users',$iduser)->lists('nama', 'id'));
             $view->with('list_akun', Akun::lists('nama_akun', 'id'));
         });
+        view()->composer('transaksipenarikan.form', function($view){
+            if(Auth::check()){
+            $iduser = Auth::user()->id;
+            }
+            $view->with('list_nasabah', Nasabah::where('id_users',$iduser)->lists('nama', 'id'));
+            $view->with('list_akun', Akun::lists('nama_akun', 'id'));
+        });
     }
 
     /**

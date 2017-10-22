@@ -16,7 +16,8 @@ class TransaksiSimpanan extends Model
     	'tanggal',
     	'jenis_simpanan',    	
     	'nominal_simpan',
-    	'id_users',
+        'id_users',
+        'status',
     	'created_at',
         'updated_at'
     ];
