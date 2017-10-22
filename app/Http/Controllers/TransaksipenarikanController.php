@@ -27,7 +27,7 @@ class TransaksipenarikanController extends Controller
         $iduser = Auth::user()->id;
         }
         $daftar = TransaksiSimpanan::all();
-        $daftarsimpanan = $daftar->where('id_users',$iduser);
+        $daftarsimpanan = $daftar->where('status','kredit','id_users',$iduser);
         $jumlahsimpanan = $daftarsimpanan->count();
         return view('transaksisimpanan.index', compact('daftarsimpanan','jumlahsimpanan'));
     }
