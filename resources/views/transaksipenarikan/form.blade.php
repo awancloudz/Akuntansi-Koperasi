@@ -60,26 +60,7 @@
 @endif
 </div>
 
-{{-- Jenis Simpananan --}}
-@if($errors->any())
-<div class="form-group {{ $errors->has('jenis_simpanan') ? 'has-error' : 'has-success' }}"></div>
-@else
-<div class="form-group">
-@endif
-{!! Form::label('jenis_simpanan','Jenis Simpanan',['class' => 'control-label','id' => 'jenis_simpanan']) !!}
-<div class="radio">
-<label>
-{!! Form::radio('jenis_simpanan','pokok') !!} Pokok
-</label>
-</div>
-<div class="radio">
-<label>{!! Form::radio('jenis_simpanan','sukarela') !!} Sukarela
-</label>
-</div>
-@if ($errors->has('jenis_simpanan'))
-<span class="help-block">{{ $errors->first('jenis_simpanan') }}</span>
-@endif
-</div>
+{!! Form::hidden('jenis_simpanan', 'penarikan') !!}
 
 {{-- Nominal --}}
 @if($errors->any())
@@ -93,7 +74,7 @@
 <span class="help-block">{{ $errors->first('nominal_simpan') }}</span>
 @endif
 </div>
-{!! Form::text('status', 'kredit') !!}
+{!! Form::hidden('status', 'kredit') !!}
 
 {{-- Submit button --}}
 <div class="form-group">
@@ -103,30 +84,5 @@
 <script>
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
-    <?php
-    	echo "var daftarnasabah ={$daftarnasabah}; ";
-    	echo "var daftarkeanggotaan ={$daftarkeanggotaan}; ";
-    ?>
-    //NASABAH CHANGE
-	$("#id_nasabah").change(function(){
-		var id_nas = document.getElementById("id_nasabah").value;
-		for(i=0; i < daftarnasabah.length; i++){
-			if(daftarnasabah[i].id == id_nas){
-				if(daftarnasabah[i].id_keanggotaan = daftarkeanggotaan[i].id){
-					document.getElementsByName("simpanan_pokok")[0].value = daftarkeanggotaan[i].simpanan_pokok;
-				}		
-			}
-		}
-	});
-	//NASABAH CHANGE
-	$(document).on('change', 'input[name="jenis_simpanan"]:radio', function(){
-    	var jns = $(this).val();
-    	if(jns == 'pokok'){
-    		document.getElementsByName("nominal_simpan")[0].value = document.getElementsByName("simpanan_pokok")[0].value;
-    	}
-    	else if(jns == 'sukarela'){
-    		document.getElementsByName("nominal_simpan")[0].value = 0;
-    	}
-	});
 });
 </script>

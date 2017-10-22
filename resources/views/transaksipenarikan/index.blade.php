@@ -17,7 +17,6 @@
 				<th>Id Akun</th>
 				<th>Nama Nasabah</th>
 				<th>Tanggal</th>
-				<th>Jenis Simpanan</th>	
 				<th>Nominal</th>	
 				<th>Action</th>
 			</tr>
@@ -29,8 +28,7 @@
 				<td>{{ $simpanan->kodetransaksi }}</td>
 				<td>{{ $simpanan->akun->nama_akun }}</td>
 				<td>{{ $simpanan->nasabah->nama }}</td>
-				<td>{{ $simpanan->tanggal }}</td>
-				<td>{{ $simpanan->jenis_simpanan }}</td>	
+				<td>{{ $simpanan->tanggal }}</td>	
 				<td>{{ $simpanan->nominal_simpan }}</td>	
 				<td>
 					<div class="box-button">

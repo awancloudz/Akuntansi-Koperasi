@@ -18,7 +18,7 @@ class CreateTableTransaksiSimpanan extends Migration
             $table->integer('id_akun')->unsigned();
             $table->integer('id_nasabah')->unsigned();
             $table->date('tanggal');
-            $table->enum('jenis_simpanan',['pokok','sukarela']);
+            $table->enum('jenis_simpanan',['pokok','sukarela','penarikan']);
             $table->double('nominal_simpan');
             $table->integer('id_users')->unsigned();
             $table->enum('status',['debit','kredit']);

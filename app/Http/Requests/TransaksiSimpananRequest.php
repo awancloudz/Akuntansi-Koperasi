@@ -34,7 +34,7 @@ class TransaksiSimpananRequest extends Request
             'id_akun' => 'required',
             'id_nasabah' => 'required',
             'tanggal' => 'required|date',
-            'jenis_simpanan' => 'required|in:pokok,sukarela',
+            'jenis_simpanan' => 'required|in:pokok,sukarela,penarikan',
             'nominal_simpan' => 'required|numeric',
         ];
     }
