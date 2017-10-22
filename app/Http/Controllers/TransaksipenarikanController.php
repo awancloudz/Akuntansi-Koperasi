@@ -39,14 +39,15 @@ class TransaksipenarikanController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){
+        /*if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $nasabah = Nasabah::all();
-        $daftarnasabah = $nasabah->where('id_users',$iduser);
+        $nasabah = TransaksiSimpanan::all();
+        $daftarnasabah = $nasabah->where('status','debit','id_users',$iduser);
         $anggota = Keanggotaan::all();
         $daftarkeanggotaan = $anggota->where('id_users',$iduser);
-        return view('transaksipenarikan.create', compact('daftarkeanggotaan','daftarnasabah'));
+        return view('transaksipenarikan.create', compact('daftarkeanggotaan','daftarnasabah'));*/
+        return view('transaksipenarikan.create');
     }
 
     /**
