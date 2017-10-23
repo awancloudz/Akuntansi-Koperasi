@@ -6,7 +6,6 @@
 	<div class="panel-body">
 	<div class="tombol-nav">
 		{{ link_to('transaksipinjaman/create','Tambah Pinjaman',['class' => 'btn btn-primary']) }}
-        {{ link_to('transaksipinjaman/cetak','Cetak Pinjaman',['class' => 'btn btn-success']) }}
 	</div><br><br><br>
 	@if (count($daftarpinjaman) > 0)
 	<table class="table">

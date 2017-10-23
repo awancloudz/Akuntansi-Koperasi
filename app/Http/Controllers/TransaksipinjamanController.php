@@ -54,24 +54,27 @@ class TransaksipinjamanController extends Controller
         //Simpan Data Transaksi
         $transaksipinjaman = TransaksiPinjaman::create($input);
         //Deklarasi Variabel
-        $saldoawal = $input->request('nominal_pinjam');
-        $kali = $input->request('kali_angsuran');
-        $persentase = $keanggotaan->bunga_pinjaman; //Cek
-        $angsuran = $saldoawal / $kali;
+        $id_trans_pinjam = TransaksiPinjaman::orderBy('id', 'desc')->first();
+        $saldo = $request->input('nominal_pinjam');
+        $kali = $request->input('kali_angsuran');
+        $persentase = 0.02; //Cek
+        $angsuran = $saldo / $kali;
         $jasa = 0;
         $totalbayar = 0;
         //Perulangan
-        $detail_angsuran = new DetailAngsuran;
-        for($i=0; $i <= $kali; $i++){
-            $jasa = $saldoawal * $persentase;
+        for($i=0; $i < $kali; $i++){
+            $jasa = $saldo * $persentase;
             $totalbayar = $angsuran + $jasa;
-            $saldoawal = $saldoawal - $angsuran;
-            //Input ke database
-            $detail_angsuran->jasa_uang = $jasa;
-            $detail_angsuran->angsuran = $angsuran;
-            $detail_angsuran->total_bayar = $totalbayar;
-            $detail_angsuran->saldo = $saldoawal;
-            $detail_angsuran->save($detail_angsuran);
+            $saldo = $saldo - $angsuran;
+            //Deklarasi Variabel Detail angsuran per jatuh tempo
+            $detailangsuran = new DetailAngsuran;
+            $detailangsuran->id_transaksi_pinjaman = $id_trans_pinjam->id;
+            $detailangsuran->angsuran = $angsuran;
+            $detailangsuran->jasa_uang = $jasa;
+            $detailangsuran->total_bayar = $totalbayar;
+            $detailangsuran->saldo = $saldo;
+            //Simpan ke database
+            $transaksipinjaman->detailangsuran()->save($detailangsuran);
         }
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         return redirect('transaksipinjaman');
