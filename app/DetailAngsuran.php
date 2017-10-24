@@ -16,7 +16,8 @@ class DetailAngsuran extends Model
     	'total_bayar',
     	'saldo',
     	'jatuh_tempo',
-    	'tanggal_bayar',
+        'tanggal_bayar',
+        'status_bayar',
     	'created_at',
         'updated_at'
     ];

@@ -21,6 +21,7 @@ class CreateTableDetailAngsuran extends Migration
             $table->double('saldo');
             $table->date('jatuh_tempo');
             $table->date('tanggal_bayar');
+            $table->enum('status_bayar',['belum','sudah']);
             $table->timestamps();
         });
     }

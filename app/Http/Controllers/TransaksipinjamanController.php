@@ -73,6 +73,7 @@ class TransaksipinjamanController extends Controller
             $detailangsuran->jasa_uang = $jasa;
             $detailangsuran->total_bayar = $totalbayar;
             $detailangsuran->saldo = $saldo;
+            $detailangsuran->status_bayar = 'belum';
             //Simpan ke database
             $transaksipinjaman->detailangsuran()->save($detailangsuran);
         }
