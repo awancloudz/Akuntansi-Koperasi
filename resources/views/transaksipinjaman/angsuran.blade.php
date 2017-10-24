@@ -34,6 +34,8 @@
                     @if($angsuran->status_bayar == 'belum')
                     {!! Form::model($angsuran, ['method' => 'PATCH', 'action' => ['TransaksipinjamanController@bayar', $angsuran->id]]) !!}
 					{!! Form::hidden('id', $angsuran->id) !!}
+                    <?php $sekarang = date("Y-m-d"); ?>
+                    {!! Form::hidden('tanggal_bayar', $sekarang) !!}
                     {!! Form::hidden('status_bayar', 'sudah') !!}
                     {!! Form::submit('Bayar', ['class' => 'btn btn-success btn-sm'])!!}
                     {!! Form::close() !!}
