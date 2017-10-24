@@ -13,6 +13,7 @@ use App\Akun;
 use App\Nasabah;
 use Session;
 use Auth;
+use Carbon\Carbon;
 
 class TransaksipinjamanController extends Controller
 {
@@ -61,8 +62,12 @@ class TransaksipinjamanController extends Controller
         $angsuran = $saldo / $kali;
         $jasa = 0;
         $totalbayar = 0;
+        //Deklarasi Variabel Jatuh Tempo
+        $tgl = new Carbon();
+        $tgl = Carbon::now();
         //Perulangan
         for($i=0; $i < $kali; $i++){
+            //Hitungan
             $jasa = $saldo * $persentase;
             $totalbayar = $angsuran + $jasa;
             $saldo = $saldo - $angsuran;
@@ -73,6 +78,7 @@ class TransaksipinjamanController extends Controller
             $detailangsuran->jasa_uang = $jasa;
             $detailangsuran->total_bayar = $totalbayar;
             $detailangsuran->saldo = $saldo;
+            $detailangsuran->jatuh_tempo = $tgl->addMonths(1)->format('Y-m-d');;
             $detailangsuran->status_bayar = 'belum';
             //Simpan ke database
             $transaksipinjaman->detailangsuran()->save($detailangsuran);
