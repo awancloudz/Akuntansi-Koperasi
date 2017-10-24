@@ -27,6 +27,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('transaksisimpanan','TransaksisimpananController');
     Route::resource('transaksipenarikan','TransaksipenarikanController');
     Route::resource('transaksipinjaman','TransaksipinjamanController');
+    Route::get('transaksipinjaman/angsuran/{transaksipinjaman}','TransaksipinjamanController@angsuran');
+    Route::patch('transaksipinjaman/bayar/{angsuran}','TransaksipinjamanController@bayar');
     Route::resource('detailangsuran','DetailangsuranController');
     Route::resource('transaksiumum','TransaksiumumController');
 

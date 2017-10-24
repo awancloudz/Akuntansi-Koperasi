@@ -81,6 +81,24 @@ class TransaksipinjamanController extends Controller
         return redirect('transaksipinjaman');
     }
 
+    public function angsuran(TransaksiPinjaman $transaksipinjaman)
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = DetailAngsuran::all();
+        $daftarangsuran = $daftar->where('id_transaksi_pinjaman',$transaksipinjaman->id,'id_users',$iduser);
+        $jumlahangsuran = $daftarangsuran->count();
+        return view('transaksipinjaman.angsuran',compact('nasabah','daftarangsuran','jumlahangsuran'));
+    }
+
+    public function bayar(DetailAngsuran $angsuran, Request $request)
+    {
+        $input = $request->all();
+        $angsuran->update($input);
+        Session::flash('flash_message', 'Angsuran sudah dibayar');
+        return redirect('transaksipinjaman/angsuran/'.$angsuran->id_transaksi_pinjaman);
+    }
     /**
      * Display the specified resource.
      *
