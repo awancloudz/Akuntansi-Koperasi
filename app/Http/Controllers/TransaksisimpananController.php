@@ -46,7 +46,9 @@ class TransaksisimpananController extends Controller
         $daftarnasabah = $nasabah->where('id_users',$iduser);
         $anggota = Keanggotaan::all();
         $daftarkeanggotaan = $anggota->where('id_users',$iduser);
-        return view('transaksisimpanan.create', compact('daftarkeanggotaan','daftarnasabah'));
+        $daftar = TransaksiSimpanan::all();
+        $kodeakhir = TransaksiSimpanan::orderBy('id', 'desc')->first();
+        return view('transaksisimpanan.create', compact('daftarkeanggotaan','daftarnasabah','kodeakhir','daftar'));
     }
 
     /**

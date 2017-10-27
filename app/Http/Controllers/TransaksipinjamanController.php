@@ -40,7 +40,9 @@ class TransaksipinjamanController extends Controller
      */
     public function create()
     {
-        return view('transaksipinjaman.create');
+        $daftar = TransaksiPinjaman::all();
+        $kodeakhir = TransaksiPinjaman::orderBy('id', 'desc')->first();
+        return view('transaksipinjaman.create', compact('kodeakhir','daftar'));
     }
 
     /**

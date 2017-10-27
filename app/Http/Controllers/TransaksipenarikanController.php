@@ -77,7 +77,7 @@ class TransaksipenarikanController extends Controller
         $transaksipenarikan = TransaksiSimpanan::create($input);
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         }
-        return redirect('nasabah/penarikan/'.$nasabah);
+        return redirect('nasabah/simpanan/'.$nasabah);
     }
 
     /**

@@ -99,7 +99,8 @@ class NasabahController extends Controller
             }
         }
         if($saldo > 0){
-            return view('transaksipenarikan.create',compact('nasabah','saldo'));
+            $kodeakhir = TransaksiPinjaman::orderBy('id', 'desc')->first();
+            return view('transaksipenarikan.create',compact('nasabah','saldo','kodeakhir','daftar'));
         }
         else{
             Session::flash('flash_message', 'Maaf Saldo tidak mencukupi');

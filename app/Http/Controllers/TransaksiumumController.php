@@ -37,7 +37,9 @@ class TransaksiumumController extends Controller
      */
     public function create()
     {
-        return view('transaksiumum.create');
+        $daftar = TransaksiUmum::all();
+        $kodeakhir = TransaksiUmum::orderBy('id', 'desc')->first();
+        return view('transaksiumum.create', compact('kodeakhir','daftar'));
     }
 
     /**

@@ -15,7 +15,7 @@
 <div class="form-group">
 @endif
 {!! Form::label('kodetransaksi','Kode Transaksi',['class' => 'control-label']) !!}
-{!! Form::text('kodetransaksi', null,['class' => 'form-control']) !!}
+{!! Form::text('kodetransaksi', null,['class' => 'form-control','readonly']) !!}
 @if ($errors->has('kodetransaksi'))
 <span class="help-block">{{ $errors->first('kodetransaksi') }}</span>
 @endif
