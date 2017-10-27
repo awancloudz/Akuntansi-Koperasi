@@ -66,10 +66,18 @@ class TransaksipenarikanController extends Controller
     public function store(TransaksiSimpananRequest $request)
     {
         $input = $request->all();
+        $nasabah = $request->input('id_nasabah');
+        $saldo = $request->input('saldo');
+        $nominal = $request->input('nominal_simpan');
+        if($nominal > $saldo){
+        Session::flash('flash_message', 'Nominal Penarikan melebihi saldo');
+        }
+        else{
         //Simpan Data Transaksi
         $transaksipenarikan = TransaksiSimpanan::create($input);
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
-        return redirect('transaksipenarikan');
+        }
+        return redirect('nasabah/penarikan/'.$nasabah);
     }
 
     /**

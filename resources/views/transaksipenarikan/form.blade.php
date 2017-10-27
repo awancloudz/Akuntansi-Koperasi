@@ -3,6 +3,7 @@
 	{!! Form::hidden('id', $transaksipenarikan->id) !!}
 	{!! Form::hidden('id_users', $transaksipenarikan->id_users ) !!}
 	@else
+	@include('_partial.flash_message')
 	{!! Form::hidden('id_users', Auth::user()->id ) !!}
 	@endif
 @endif
@@ -62,7 +63,7 @@
 <span class="help-block">{{ $errors->first('tanggal') }}</span>
 @endif
 </div>
-
+{!! Form::text('saldo', $saldo) !!}
 {!! Form::hidden('jenis_simpanan', 'penarikan') !!}
 
 {{-- Nominal --}}
