@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('keanggotaan','KeanggotaanController');
     Route::resource('nasabah','NasabahController');
     Route::get('nasabah/simpanan/{nasabah}','NasabahController@simpanan');
+    Route::get('nasabah/penarikan/{nasabah}','NasabahController@penarikan');
     Route::get('nasabah/pinjaman/{nasabah}','NasabahController@pinjaman');
     Route::resource('transaksisimpanan','TransaksisimpananController');
     Route::resource('transaksipenarikan','TransaksipenarikanController');

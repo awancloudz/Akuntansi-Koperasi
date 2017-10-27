@@ -40,20 +40,21 @@ class TransaksipenarikanController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){
+        /*if(Auth::check()){
         $iduser = Auth::user()->id;
         }
         //HITUNG SALDO SIMPANAN NASABAH 
         $data = DB::table('transaksi_simpanan')
         //->select('id_nasabah','status','id_users', DB::raw('SUM(nominal_simpan) as saldo'))
-        ->select('id_nasabah','id_users')
         //->where('status','debit')
+        ->select('id_nasabah','id_users')
         ->where('id_users',$iduser)
         ->groupBy('id_nasabah')
         ->get();
         $daftarnasabah = collect($data)->toJson();
-        //return $daftarnasabah;
-        return view('transaksipenarikan.create', compact('daftarnasabah'));
+        //return $data;
+        return view('transaksipenarikan.create', compact('daftarnasabah'));*/
+        return view('transaksipenarikan.create');
     }
 
     /**

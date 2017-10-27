@@ -36,6 +36,8 @@
 					<div class="box-button">
 					{{ link_to('nasabah/simpanan/' . $nasabah->id, 'Simpanan', ['class' => 'btn btn-success btn-sm']) }}
 					<div class="box-button">
+					{{ link_to('nasabah/penarikan/' . $nasabah->id, 'Penarikan', ['class' => 'btn btn-default btn-sm']) }}
+					<div class="box-button">
 					{{ link_to('nasabah/pinjaman/' . $nasabah->id, 'Pinjaman', ['class' => 'btn btn-primary btn-sm']) }}
 					<div class="box-button">
 					{{ link_to('nasabah/' . $nasabah->id . '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}

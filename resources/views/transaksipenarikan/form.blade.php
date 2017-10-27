@@ -6,7 +6,6 @@
 	{!! Form::hidden('id_users', Auth::user()->id ) !!}
 	@endif
 @endif
-
 {!! Form::hidden('simpanan_pokok', 0) !!}
 {{-- Kode Transaksi --}}
 @if($errors->any())
@@ -84,21 +83,5 @@
 <script>
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
-	<?php
-    	echo "var daftarnasabah ={$daftarnasabah}; ";
-    ?>
-	//NASABAH CHANGE
-	$("#id_nasabah").change(function(){
-		var id_nas = document.getElementById("id_nasabah").value;
-		for(i=0; i < daftarnasabah.length; i++){
-			if(daftarnasabah[i].id_nasabah == id_nas){
-				var ada = 1;
-			}
-			else{
-				var ada = 0;
-			}
-		}
-		console.log(ada);
-	});
 });
 </script>

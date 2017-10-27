@@ -81,6 +81,31 @@ class NasabahController extends Controller
         $jumlahsimpanan = $daftarsimpanan->count();
         return view('nasabah.simpanan',compact('nasabah','daftarsimpanan','jumlahsimpanan'));
     }
+    public function penarikan(Nasabah $nasabah)
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = TransaksiSimpanan::all();
+        $daftarsimpanan = $daftar->where('id_nasabah',$nasabah->id,'id_users',$iduser);
+        $jumlahsimpanan = $daftarsimpanan->count();
+        $saldo = 0;
+        foreach($daftarsimpanan as $simpanan){
+            if($simpanan->status == 'debit'){
+                $saldo = $saldo + $simpanan->nominal_simpan;
+            }
+            else if($simpanan->status == 'kredit'){
+                $saldo = $saldo - $simpanan->nominal_simpan;
+            }
+        }
+        if($saldo > 0){
+            return view('transaksipenarikan.create',compact('nasabah','saldo'));
+        }
+        else{
+            Session::flash('flash_message', 'Maaf Saldo tidak mencukupi');
+            return redirect('nasabah');
+        }
+    }
 
     public function pinjaman(Nasabah $nasabah)
     {
