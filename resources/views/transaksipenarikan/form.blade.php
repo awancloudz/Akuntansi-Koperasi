@@ -63,7 +63,7 @@
 <span class="help-block">{{ $errors->first('tanggal') }}</span>
 @endif
 </div>
-{!! Form::text('saldo', $saldo) !!}
+{!! Form::hidden('saldo', $saldo) !!}
 {!! Form::hidden('jenis_simpanan', 'penarikan') !!}
 
 {{-- Nominal --}}
