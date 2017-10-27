@@ -13,6 +13,7 @@ use App\Nasabah;
 use App\Keanggotaan;
 use Session;
 use Auth;
+use DB;
 
 class TransaksipenarikanController extends Controller
 {
@@ -39,15 +40,20 @@ class TransaksipenarikanController extends Controller
      */
     public function create()
     {
-        /*if(Auth::check()){
+        if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $nasabah = TransaksiSimpanan::all();
-        $daftarnasabah = $nasabah->where('status','debit','id_users',$iduser);
-        $anggota = Keanggotaan::all();
-        $daftarkeanggotaan = $anggota->where('id_users',$iduser);
-        return view('transaksipenarikan.create', compact('daftarkeanggotaan','daftarnasabah'));*/
-        return view('transaksipenarikan.create');
+        //HITUNG SALDO SIMPANAN NASABAH 
+        $data = DB::table('transaksi_simpanan')
+        //->select('id_nasabah','status','id_users', DB::raw('SUM(nominal_simpan) as saldo'))
+        ->select('id_nasabah','id_users')
+        //->where('status','debit')
+        ->where('id_users',$iduser)
+        ->groupBy('id_nasabah')
+        ->get();
+        $daftarnasabah = collect($data)->toJson();
+        //return $daftarnasabah;
+        return view('transaksipenarikan.create', compact('daftarnasabah'));
     }
 
     /**

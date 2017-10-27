@@ -115,6 +115,10 @@ $(document).ready(function() {
 			if(daftarnasabah[i].id == id_nas){
 				if(daftarnasabah[i].id_keanggotaan = daftarkeanggotaan[i].id){
 					document.getElementsByName("simpanan_pokok")[0].value = daftarkeanggotaan[i].simpanan_pokok;
+					var jnssimp = $('input[name="jenis_simpanan"]:checked').val();
+					if(jnssimp == 'pokok'){
+						document.getElementsByName("nominal_simpan")[0].value = document.getElementsByName("simpanan_pokok")[0].value;
+					}
 				}		
 			}
 		}
@@ -129,5 +133,6 @@ $(document).ready(function() {
     		document.getElementsByName("nominal_simpan")[0].value = 0;
     	}
 	});
+	var jnssimp = $('input[name="jenis_simpanan"]:checked').val();
 });
 </script>
