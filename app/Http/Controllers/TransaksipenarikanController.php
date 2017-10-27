@@ -54,7 +54,7 @@ class TransaksipenarikanController extends Controller
         $daftarnasabah = collect($data)->toJson();
         //return $data;
         return view('transaksipenarikan.create', compact('daftarnasabah'));*/
-        return view('transaksipenarikan.create');
+        //return view('transaksipenarikan.create');
     }
 
     /**

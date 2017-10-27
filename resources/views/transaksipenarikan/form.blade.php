@@ -33,18 +33,22 @@
 @endif
 </div>
 
-{{-- Nasabah --}}
-<div class="form-group">
-{!! Form::label('id_nasabah','Nasabah',['class' => 'control-label']) !!}
-@if(count($list_nasabah) > 0)
-{!! Form::select('id_nasabah', $list_nasabah, null,['class' => 'form-control js-example-basic-single', 'id'=>'id_nasabah','placeholder'=>'Pilih Nasabah']) !!}
+@if (isset($transaksipenarikan))
+	{{-- Nasabah --}}
+	<div class="form-group">
+	{!! Form::label('id_nasabah','Nasabah',['class' => 'control-label']) !!}
+	@if(count($list_nasabah) > 0)
+	{!! Form::select('id_nasabah', $list_nasabah, null,['class' => 'form-control js-example-basic-single', 'id'=>'id_nasabah','placeholder'=>'Pilih Nasabah']) !!}
+	@else
+	<p>Tidak ada pilihan nasabah,silahkan buat dulu.</p>
+	@endif
+	@if ($errors->has('id_nasabah'))
+	<span class="help-block">{{ $errors->first('id_nasabah') }}</span>
+	@endif
+	</div>
 @else
-<p>Tidak ada pilihan nasabah,silahkan buat dulu.</p>
+	{!! Form::hidden('id_nasabah', $nasabah->id ) !!}
 @endif
-@if ($errors->has('id_nasabah'))
-<span class="help-block">{{ $errors->first('id_nasabah') }}</span>
-@endif
-</div>
 
 {{-- Tanggal --}}
 @if($errors->any())
