@@ -170,4 +170,21 @@ class NasabahController extends Controller
         $pdf = PDF::loadView('nasabah.printsimpanan',compact('nasabah','daftarsimpanan','jumlahsimpanan'))->setPaper('a4','portrait');
         return $pdf->stream();
     }
+
+    //pencarian
+    public function cari(Request $request){
+        $kata_kunci = $request->input('kata_kunci');    //Ambil value dari inputan pencarian
+        if(!empty($kata_kunci)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $query = Nasabah::where('nama', 'LIKE', '%' . $kata_kunci . '%');
+
+            $daftarnasabah = $query->paginate(10);
+
+            //Url Pagination
+            $pagination = $daftarnasabah->appends($request->except('page'));
+            $jumlahnasabah = $daftarnasabah->total();
+            return view('nasabah.index', compact('daftarnasabah','kata_kunci','pagination','jumlahnasabah'));
+        }
+        return redirect('nasabah');
+    }
 }

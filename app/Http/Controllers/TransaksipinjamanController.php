@@ -172,4 +172,20 @@ class TransaksipinjamanController extends Controller
         $pdf = PDF::loadView('transaksipinjaman.printangsuran',compact('transaksipinjaman','daftarangsuran','jumlahangsuran'))->setPaper('a4','portrait');
         return $pdf->stream();
     }
+    //pencarian
+    public function cari(Request $request){
+        $kata_kunci = $request->input('kata_kunci');    //Ambil value dari inputan pencarian
+        if(!empty($kata_kunci)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $query = TransaksiPinjaman::where('kodetransaksi', 'LIKE', '%' . $kata_kunci . '%');
+
+            $daftarpinjaman = $query->paginate(10);
+
+            //Url Pagination
+            $pagination = $daftarpinjaman->appends($request->except('page'));
+            $jumlahpinjaman = $daftarpinjaman->total();
+            return view('transaksipinjaman.index', compact('daftarpinjaman','kata_kunci','pagination','jumlahpinjaman'));
+        }
+        return redirect('transaksipinjaman');
+    }
 }

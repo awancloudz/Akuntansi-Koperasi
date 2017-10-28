@@ -18,9 +18,13 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/', 'HomeController@index');
     Route::resource('user','UserController');
 
+    //DATA MASTER
     Route::resource('header','HeaderController');
     Route::resource('akun','AkunController');
     Route::resource('keanggotaan','KeanggotaanController');
+
+    //NASABAH
+    Route::get('nasabah/cari','NasabahController@cari');
     Route::resource('nasabah','NasabahController');
     Route::get('nasabah/simpanan/{nasabah}','NasabahController@simpanan');
     Route::get('nasabah/cetaksimpanan/{nasabah}',[
@@ -28,8 +32,12 @@ Route::group(['middleware' => ['web']], function(){
     'as' => 'nasabah.printsimpanan',]);
     Route::get('nasabah/penarikan/{nasabah}','NasabahController@penarikan');
     Route::get('nasabah/pinjaman/{nasabah}','NasabahController@pinjaman');
+
+    //TRANSAKSI
+    Route::get('transaksisimpanan/cari','TransaksisimpananController@cari');
     Route::resource('transaksisimpanan','TransaksisimpananController');
     Route::resource('transaksipenarikan','TransaksipenarikanController');
+    Route::get('transaksipinjaman/cari','TransaksipinjamanController@cari');
     Route::resource('transaksipinjaman','TransaksipinjamanController');
     Route::get('transaksipinjaman/angsuran/{transaksipinjaman}','TransaksipinjamanController@angsuran');
     Route::get('transaksipinjaman/cetakangsuran/{transaksipinjaman}',[
@@ -37,6 +45,7 @@ Route::group(['middleware' => ['web']], function(){
     'as' => 'transaksipinjaman.printangsuran',]);
     Route::patch('transaksipinjaman/bayar/{angsuran}','TransaksipinjamanController@bayar');
     Route::resource('detailangsuran','DetailangsuranController');
+    Route::get('transaksiumum/cari','TransaksiumumController@cari');
     Route::resource('transaksiumum','TransaksiumumController');
 
     //CONTOH

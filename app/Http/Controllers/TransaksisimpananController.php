@@ -124,4 +124,21 @@ class TransaksisimpananController extends Controller
         return redirect('transaksisimpanan');
 
     }
+
+    //pencarian
+    public function cari(Request $request){
+        $kata_kunci = $request->input('kata_kunci');    //Ambil value dari inputan pencarian
+        if(!empty($kata_kunci)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $query = TransaksiSimpanan::where('kodetransaksi', 'LIKE', '%' . $kata_kunci . '%');
+
+            $daftarsimpanan = $query->paginate(10);
+
+            //Url Pagination
+            $pagination = $daftarsimpanan->appends($request->except('page'));
+            $jumlahsimpanan = $daftarsimpanan->total();
+            return view('transaksisimpanan.index', compact('daftarsimpanan','kata_kunci','pagination','jumlahsimpanan'));
+        }
+        return redirect('transaksisimpanan');
+    }
 }

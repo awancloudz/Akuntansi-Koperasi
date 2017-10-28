@@ -1,5 +1,5 @@
 <div id="pencarian">
-	{!! Form::open(['url' => 'transaksipinjaman/cari', 'method' => 'GET', 'id' => 'form_pencarian']) !!}
+	{!! Form::open(['url' => 'transaksiumum/cari', 'method' => 'GET', 'id' => 'form_pencarian']) !!}
 <div class="row">
 	<div class="col-md-8">
 		<div class="input-group">

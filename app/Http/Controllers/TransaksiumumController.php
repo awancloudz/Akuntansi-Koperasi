@@ -107,4 +107,20 @@ class TransaksiumumController extends Controller
         Session::flash('Penting', true);        
         return redirect('transaksiumum');
     }
+    //pencarian
+    public function cari(Request $request){
+        $kata_kunci = $request->input('kata_kunci');    //Ambil value dari inputan pencarian
+        if(!empty($kata_kunci)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $query = TransaksiUmum::where('kodetransaksi', 'LIKE', '%' . $kata_kunci . '%');
+
+            $daftarumum = $query->paginate(10);
+
+            //Url Pagination
+            $pagination = $daftarumum->appends($request->except('page'));
+            $jumlahumum = $daftarumum->total();
+            return view('transaksiumum.index', compact('daftarumum','kata_kunci','pagination','jumlahumum'));
+        }
+        return redirect('transaksiumum');
+    }
 }
