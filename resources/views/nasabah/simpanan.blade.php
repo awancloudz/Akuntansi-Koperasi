@@ -7,7 +7,7 @@
 	<div class="tombol-nav">
 		{{ link_to('transaksisimpanan/create','Tambah Simpanan',['class' => 'btn btn-primary']) }}
 		{{ link_to('nasabah/penarikan/' . $nasabah->id,'Tambah Penarikan',['class' => 'btn btn-success']) }}
-		{{ link_to('transaksisimpanan/cetak','Cetak Transaksi',['class' => 'btn btn-warning']) }}
+		{{ link_to('nasabah/cetaksimpanan/' . $nasabah->id,'Cetak Transaksi',['class' => 'btn btn-warning','target'=>'_blank']) }}
 	</div><br><br><br>
 	@if (count($daftarsimpanan) > 0)
 	<table class="table">

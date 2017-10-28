@@ -46,6 +46,9 @@
 					{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm'])!!}
 					{!! Form::close()!!}
 					</div>
+					<div class="box-button">
+					{{ link_to('transaksipinjaman/cetakangsuran/' . $pinjaman->id,'Cetak',['class' => 'btn btn-primary btn-sm','target'=>'_blank']) }}
+					</div>
 				</td>
 			</tr>
 		<?php endforeach ?>

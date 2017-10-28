@@ -13,7 +13,7 @@ use Session;
 use Auth;
 use App\TransaksiSimpanan;
 use App\TransaksiPinjaman;
-//use PDF;
+use PDF;
 //use DB;
 //use Excel;
 
@@ -156,5 +156,18 @@ class NasabahController extends Controller
         Session::flash('flash_message', 'Data Nasabah berhasil dihapus');
         Session::flash('Penting', true);        
         return redirect('nasabah');
+    }
+    //cetak pdf simpanan
+    public function getPdf(Nasabah $nasabah)
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = TransaksiSimpanan::all();
+        $daftarsimpanan = $daftar->where('id_nasabah',$nasabah->id,'id_users',$iduser);
+        $jumlahsimpanan = $daftarsimpanan->count();
+
+        $pdf = PDF::loadView('nasabah.printsimpanan',compact('nasabah','daftarsimpanan','jumlahsimpanan'))->setPaper('a4','portrait');
+        return $pdf->stream();
     }
 }

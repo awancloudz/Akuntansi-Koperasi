@@ -34,6 +34,9 @@
 					<div class="box-button">
 					{{ link_to('transaksipinjaman/angsuran/' . $pinjaman->id , 'Detail Angsuran', ['class' => 'btn btn-warning btn-sm']) }}
 					</div>
+					<div class="box-button">
+					{{ link_to('transaksipinjaman/cetakangsuran/' . $pinjaman->id,'Cetak Angsuran',['class' => 'btn btn-success btn-sm','target'=>'_blank']) }}
+					</div>
 				</td>
 			</tr>
 		<?php endforeach ?>

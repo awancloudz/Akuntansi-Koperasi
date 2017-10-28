@@ -23,12 +23,18 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('keanggotaan','KeanggotaanController');
     Route::resource('nasabah','NasabahController');
     Route::get('nasabah/simpanan/{nasabah}','NasabahController@simpanan');
+    Route::get('nasabah/cetaksimpanan/{nasabah}',[
+    'uses' => 'NasabahController@getPdf',
+    'as' => 'nasabah.printsimpanan',]);
     Route::get('nasabah/penarikan/{nasabah}','NasabahController@penarikan');
     Route::get('nasabah/pinjaman/{nasabah}','NasabahController@pinjaman');
     Route::resource('transaksisimpanan','TransaksisimpananController');
     Route::resource('transaksipenarikan','TransaksipenarikanController');
     Route::resource('transaksipinjaman','TransaksipinjamanController');
     Route::get('transaksipinjaman/angsuran/{transaksipinjaman}','TransaksipinjamanController@angsuran');
+    Route::get('transaksipinjaman/cetakangsuran/{transaksipinjaman}',[
+    'uses' => 'TransaksipinjamanController@getPdf',
+    'as' => 'transaksipinjaman.printangsuran',]);
     Route::patch('transaksipinjaman/bayar/{angsuran}','TransaksipinjamanController@bayar');
     Route::resource('detailangsuran','DetailangsuranController');
     Route::resource('transaksiumum','TransaksiumumController');

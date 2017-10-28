@@ -5,6 +5,9 @@
 	<div class="panel-heading"><b><h4>Data Detail Angsuran</h4></b></div>
 	<div class="panel-body">
     @include('_partial.flash_message')
+	<div class="tombol-nav">
+		{{ link_to('transaksipinjaman/cetakangsuran/' . $transaksipinjaman->id,'Cetak Angsuran',['class' => 'btn btn-warning','target'=>'_blank']) }}
+	</div>
 	@if (count($daftarangsuran) > 0)
 	<table class="table">
 		<thead>

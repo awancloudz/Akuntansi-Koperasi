@@ -13,6 +13,7 @@ use App\Akun;
 use App\Nasabah;
 use Session;
 use Auth;
+use PDF;
 use Carbon\Carbon;
 
 class TransaksipinjamanController extends Controller
@@ -97,7 +98,7 @@ class TransaksipinjamanController extends Controller
         $daftar = DetailAngsuran::all();
         $daftarangsuran = $daftar->where('id_transaksi_pinjaman',$transaksipinjaman->id,'id_users',$iduser);
         $jumlahangsuran = $daftarangsuran->count();
-        return view('transaksipinjaman.angsuran',compact('nasabah','daftarangsuran','jumlahangsuran'));
+        return view('transaksipinjaman.angsuran',compact('transaksipinjaman','nasabah','daftarangsuran','jumlahangsuran'));
     }
 
     public function bayar(DetailAngsuran $angsuran, Request $request)
@@ -156,5 +157,19 @@ class TransaksipinjamanController extends Controller
         Session::flash('flash_message', 'Data Transaksi berhasil dihapus');
         Session::flash('Penting', true);        
         return redirect('transaksipinjaman');
+    }
+
+    //cetak pdf simpanan
+    public function getPdf(TransaksiPinjaman $transaksipinjaman)
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = DetailAngsuran::all();
+        $daftarangsuran = $daftar->where('id_transaksi_pinjaman',$transaksipinjaman->id,'id_users',$iduser);
+        $jumlahangsuran = $daftarangsuran->count();
+
+        $pdf = PDF::loadView('transaksipinjaman.printangsuran',compact('transaksipinjaman','daftarangsuran','jumlahangsuran'))->setPaper('a4','portrait');
+        return $pdf->stream();
     }
 }
