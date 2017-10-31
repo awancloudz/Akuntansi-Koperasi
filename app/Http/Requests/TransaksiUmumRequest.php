@@ -34,6 +34,7 @@ class TransaksiUmumRequest extends Request
             'id_akun' => 'required',
             'tanggal' => 'required|date',
             'nominal' => 'required|numeric',
+            'status' => 'required',
         ];
     }
 }

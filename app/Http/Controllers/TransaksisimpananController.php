@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\TransaksiSimpananRequest;
 
 use App\TransaksiSimpanan;
+use App\TransaksiSemua;
 use App\Akun;
 use App\Nasabah;
 use App\Keanggotaan;
@@ -59,9 +60,20 @@ class TransaksisimpananController extends Controller
      */
     public function store(TransaksiSimpananRequest $request)
     {
-        $input = $request->all();
+        $input = $request->all();        
         //Simpan Data Transaksi
         $transaksisimpanan = TransaksiSimpanan::create($input);
+        //Transaksi Semua
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_simpan;
+        $transaksisemua->keterangan = "Simpanan Nasabah";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "debit";
+        $transaksisemua->save();
+        //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         return redirect('transaksisimpanan');
     }
@@ -106,6 +118,19 @@ class TransaksisimpananController extends Controller
     {
         $input = $request->all();
         $transaksisimpanan->update($input);
+        //Transaksi Semua
+        $kodetrans = $request->input('kodetransaksi');
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodetrans)->firstOrFail();
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_simpan;
+        $transaksisemua->keterangan = "Simpanan Nasabah";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "debit";
+        $transaksisemua->update();
+        //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi berhasil diupdate');
         return redirect('transaksisimpanan');
     }
@@ -119,6 +144,12 @@ class TransaksisimpananController extends Controller
     public function destroy(TransaksiSimpanan $transaksisimpanan)
     {
         $transaksisimpanan->delete();
+        //Transaksi Semua
+        $kodetrans = $transaksisimpanan->kodetransaksi;
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodetrans)->firstOrFail();
+        $transaksisemua->delete();
+        //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi berhasil dihapus');
         Session::flash('Penting', true);        
         return redirect('transaksisimpanan');

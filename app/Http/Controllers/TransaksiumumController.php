@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\TransaksiUmumRequest;
 
 use App\TransaksiUmum;
+use App\TransaksiSemua;
 use App\Akun;
 use Session;
 use Auth;
@@ -51,8 +52,11 @@ class TransaksiumumController extends Controller
     public function store(TransaksiUmumRequest $request)
     {
         $input = $request->all();
+        $nominal = $request->input('nominal_simpan');
         //Simpan Data Transaksi
         $transaksiumum = TransaksiUmum::create($input);
+        //Transaksi Semua
+        $transaksisemua = TransaksiSemua::create($input);
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         return redirect('transaksiumum');
     }
@@ -90,6 +94,12 @@ class TransaksiumumController extends Controller
     {
         $input = $request->all();
         $transaksiumum->update($input);
+        //Transaksi Semua
+        $kodetrans = $request->input('kodetransaksi');
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodetrans)->firstOrFail();
+        $transaksisemua->update($input);
+        //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi berhasil diupdate');
         return redirect('transaksiumum');
     }
@@ -103,6 +113,12 @@ class TransaksiumumController extends Controller
     public function destroy(TransaksiUmum $transaksiumum)
     {
         $transaksiumum->delete();
+        //Transaksi Semua
+        $kodetrans = $transaksiumum->kodetransaksi;
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodetrans)->firstOrFail();
+        $transaksisemua->delete();
+        //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi berhasil dihapus');
         Session::flash('Penting', true);        
         return redirect('transaksiumum');

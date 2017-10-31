@@ -15,7 +15,8 @@ class TransaksiUmum extends Model
     	'tanggal',
     	'nominal',    	
     	'keterangan',
-    	'id_users',
+        'id_users',
+        'status',
     	'created_at',
         'updated_at'
     ];

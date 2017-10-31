@@ -20,6 +20,7 @@ class CreateTableTransaksiUmum extends Migration
             $table->double('nominal');
             $table->text('keterangan');
             $table->integer('id_users')->unsigned();
+            $table->enum('status',['debit','kredit']);
             $table->timestamps();
         });
     }

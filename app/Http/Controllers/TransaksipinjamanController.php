@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\TransaksiPinjamanRequest;
 
 use App\TransaksiPinjaman;
+use App\TransaksiSemua;
 use App\DetailAngsuran;
 use App\Akun;
 use App\Nasabah;
@@ -57,6 +58,18 @@ class TransaksipinjamanController extends Controller
         $input = $request->all();
         //Simpan Data Transaksi
         $transaksipinjaman = TransaksiPinjaman::create($input);
+        //Transaksi Semua
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_pinjam;
+        $transaksisemua->keterangan = "Pinjaman Nasabah";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "kredit";
+        $transaksisemua->save();
+        //End Transaksi Semua
+        
         //Deklarasi Variabel
         $id_trans_pinjam = TransaksiPinjaman::orderBy('id', 'desc')->first();
         $saldo = $request->input('nominal_pinjam');
@@ -105,6 +118,21 @@ class TransaksipinjamanController extends Controller
     {
         $input = $request->all();
         $angsuran->update($input);
+        //Transaksi Semua
+        $idtrans = $angsuran->id_transaksi_pinjaman;
+        $transaksipinjaman = New TransaksiPinjaman;
+        $transaksipinjaman = TransaksiPinjaman::findOrFail($idtrans);
+
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-ANGS".$angsuran->id;
+        $transaksisemua->id_akun = $transaksipinjaman->id_akun;
+        $transaksisemua->tanggal = $request->tanggal_bayar;
+        $transaksisemua->nominal = $angsuran->total_bayar;
+        $transaksisemua->keterangan = "Angsuran Nasabah";
+        $transaksisemua->id_users = $transaksipinjaman->id_users;
+        $transaksisemua->status = "debit";
+        $transaksisemua->save();
+        //End Transaksi Semua
         Session::flash('flash_message', 'Angsuran sudah dibayar');
         return redirect('transaksipinjaman/angsuran/'.$angsuran->id_transaksi_pinjaman);
     }

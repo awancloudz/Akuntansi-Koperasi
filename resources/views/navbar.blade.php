@@ -66,10 +66,10 @@
 					<li><a href="{{ url('transaksipinjaman') }}">Pinjaman</a></li>
 					@endif
 					@if (!empty($halaman) && $halaman == 'transaksiumum')
-					<li class="active"><a href="{{ url('transaksiumum') }}">Umum (Kas & Bank)</a>
+					<li class="active"><a href="{{ url('transaksiumum') }}">Umum</a>
 					<span class="sr-only">(current)</span></li>
 					@else
-					<li><a href="{{ url('transaksiumum') }}">Umum (Kas & Bank)</a></li>
+					<li><a href="{{ url('transaksiumum') }}">Umum</a></li>
 					@endif
                 </ul>
 		 	</li>

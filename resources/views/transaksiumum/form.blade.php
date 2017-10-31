@@ -20,6 +20,18 @@
 @endif
 </div>
 
+{{-- Jenis Transaksi --}}
+<div class="form-group">
+{!! Form::label('status','Jenis Transaksi',['class' => 'control-label']) !!}
+<select name="status" class="form-control js-example-basic-single">
+<option value="debit">Penerimaan</option>
+<option value="kredit">Pengeluaran</option>
+</select>
+@if ($errors->has('status'))
+<span class="help-block">{{ $errors->first('status') }}</span>
+@endif
+</div>
+
 {{-- Akun --}}
 <div class="form-group">
 {!! Form::label('id_akun','Akun',['class' => 'control-label']) !!}

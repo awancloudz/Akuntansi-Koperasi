@@ -99,7 +99,7 @@ class NasabahController extends Controller
             }
         }
         if($saldo > 0){
-            $kodeakhir = TransaksiPinjaman::orderBy('id', 'desc')->first();
+            $kodeakhir = TransaksiSimpanan::orderBy('id', 'desc')->first();
             return view('transaksipenarikan.create',compact('nasabah','saldo','kodeakhir','daftar'));
         }
         else{

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\TransaksiSimpananRequest;
 
 use App\TransaksiSimpanan;
+use App\TransaksiSemua;
 use App\Akun;
 use App\Nasabah;
 use App\Keanggotaan;
@@ -40,21 +41,7 @@ class TransaksipenarikanController extends Controller
      */
     public function create()
     {
-        /*if(Auth::check()){
-        $iduser = Auth::user()->id;
-        }
-        //HITUNG SALDO SIMPANAN NASABAH 
-        $data = DB::table('transaksi_simpanan')
-        //->select('id_nasabah','status','id_users', DB::raw('SUM(nominal_simpan) as saldo'))
-        //->where('status','debit')
-        ->select('id_nasabah','id_users')
-        ->where('id_users',$iduser)
-        ->groupBy('id_nasabah')
-        ->get();
-        $daftarnasabah = collect($data)->toJson();
-        //return $data;
-        return view('transaksipenarikan.create', compact('daftarnasabah'));*/
-        //return view('transaksipenarikan.create');
+
     }
 
     /**
@@ -75,6 +62,17 @@ class TransaksipenarikanController extends Controller
         else{
         //Simpan Data Transaksi
         $transaksipenarikan = TransaksiSimpanan::create($input);
+        //Transaksi Semua
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_simpan;
+        $transaksisemua->keterangan = "Penarikan Nasabah";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "kredit";
+        $transaksisemua->save();
+        //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         }
         return redirect('nasabah/simpanan/'.$nasabah);
