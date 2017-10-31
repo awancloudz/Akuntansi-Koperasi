@@ -57,6 +57,13 @@ class CreateUsersTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
+        Schema::table('transaksi_semua', function(Blueprint $table) {
+            $table->foreign('id_users')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
     }
 
     /**
@@ -80,6 +87,9 @@ class CreateUsersTable extends Migration
         });
         Schema::table('transaksi_umum', function(Blueprint $table) {
             $table->dropForeign('transaksi_umum_id_users_foreign');
+        });
+        Schema::table('transaksi_semua', function(Blueprint $table) {
+            $table->dropForeign('transaksi_semua_id_users_foreign');
         });
         Schema::drop('users');
     }

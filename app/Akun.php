@@ -27,6 +27,9 @@ class Akun extends Model
     public function transaksiutama(){
         return $this->hasMany('App\TransaksiUtama', 'id_akun');
     }
+    public function transaksisemua(){
+        return $this->hasMany('App\TransaksiSemua', 'id_akun');
+    }
     //One to Many DARI <-
     public function header(){
         return $this->belongsTo('App\Header', 'id_header');

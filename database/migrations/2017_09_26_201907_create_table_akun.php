@@ -40,6 +40,13 @@ class CreateTableAkun extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
+        Schema::table('transaksi_semua', function(Blueprint $table) {
+            $table->foreign('id_akun')
+                ->references('id')
+                ->on('akun')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
     }
 
     /**
@@ -57,6 +64,9 @@ class CreateTableAkun extends Migration
         });
         Schema::table('transaksi_umum', function(Blueprint $table) {
             $table->dropForeign('transaksi_umum_id_akun_foreign');
+        });
+        Schema::table('transaksi_semua', function(Blueprint $table) {
+            $table->dropForeign('transaksi_semua_id_akun_foreign');
         });
         Schema::drop('akun');
     }

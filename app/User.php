@@ -37,6 +37,9 @@ class User extends Authenticatable
     public function transaksipinjaman(){
         return $this->hasMany('App\TransaksiPinjaman', 'id_users');
     }
+    public function transaksisemua(){
+        return $this->hasMany('App\TransaksiSemua', 'id_users');
+    }
     public function transaksiutama(){
         return $this->hasMany('App\TransaksiUtama', 'id_users');
     }
