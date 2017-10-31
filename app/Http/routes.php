@@ -47,23 +47,6 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('detailangsuran','DetailangsuranController');
     Route::get('transaksiumum/cari','TransaksiumumController@cari');
     Route::resource('transaksiumum','TransaksiumumController');
-
-    //CONTOH
-    
-    Route::get('nasabah/cari','NasabahController@cari');
-    /*Route::get('produk/caribarcode','ProdukController@caribarcode');
-    Route::resource('produk','ProdukController');
-    Route::get('kategori/{cat}',[
-    'uses' => 'ProdukController@kategori',
-    'as'   => 'kategori'
-    ]);
-    Route::get('produk/print/{produk}',[
-    'uses' => 'ProdukController@getPdf',
-    'as' => 'produk.print',
-    ]);
-    Route::post('importExcel', 'ProdukController@importExcel');
-    Route::get('exportExcel/{type}', 'ProdukController@exportExcel');
-    */
 });
 
 
