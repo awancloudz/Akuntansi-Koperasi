@@ -8,9 +8,15 @@
 	@include('akun.form_pencarian')
 	<div class="tombol-nav">
 		{{ link_to('akun/create','Tambah Akun',['class' => 'btn btn-primary']) }}
-	</div><br><br><br>
+	</div><br><br>
+	<!--<form style="border: 2px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ URL::to('importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+		<input type="file" name="import_file" /><br>
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<button class="btn btn-success">Import File Excel</button>
+	</form>
+	<br><br><br>-->
 	@if (count($daftarakun) > 0)
-	<table class="table">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Kode Akun</th>

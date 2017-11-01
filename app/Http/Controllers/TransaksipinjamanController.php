@@ -124,7 +124,7 @@ class TransaksipinjamanController extends Controller
         $transaksipinjaman = TransaksiPinjaman::findOrFail($idtrans);
 
         $transaksisemua = New TransaksiSemua;
-        $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi;
+        $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$idtrans;
         $transaksisemua->id_akun = $transaksipinjaman->id_akun;
         $transaksisemua->tanggal = $request->tanggal_bayar;
         $transaksisemua->nominal = $angsuran->total_bayar;

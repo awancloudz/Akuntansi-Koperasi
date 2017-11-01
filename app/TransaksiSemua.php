@@ -11,7 +11,7 @@ class TransaksiSemua extends Model
     //Hanya jika semua data disimpan tanpa seleksi
     protected $fillable = [
         'kodetransaksi',
-    	'id_akun',
+        'id_akun',
     	'tanggal',
     	'nominal',    	
     	'keterangan',

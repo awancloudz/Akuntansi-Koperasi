@@ -10,8 +10,8 @@ use App\Header;
 use App\Akun;
 use Session;
 //use PDF;
-//use DB;
-//use Excel;
+use DB;
+use Excel;
 
 class AkunController extends Controller
 {
@@ -101,5 +101,31 @@ class AkunController extends Controller
         Session::flash('flash_message', 'Data Akun berhasil dihapus');
         Session::flash('Penting', true);        
         return redirect('akun');
+    }
+
+    //Import Excel
+    public function importExcel(Request $request)
+    {
+        if($request->hasFile('import_file')){
+            $path = $request->file('import_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {
+            })->get();
+            if(!empty($data) && $data->count()){
+                foreach ($data as $key => $value) {
+                    $insert[] = ['id'=>'' ,'id_header' => $value->id_header ,'kode_akun'=>$value->kode_akun ,'nama_akun' => $value->nama_akun ,'status' => $value->status];
+                }
+                if(!empty($insert)){
+                    DB::table('akun')->insert($insert);
+                    Session::flash('flash_message', 'Import Data Akun Berhasil');
+                }
+            }
+            else{
+                Session::flash('flash_message', 'Data Kosong');
+            }
+        }
+        else{
+            Session::flash('flash_message', 'Silahkan Pilih File Excel (.xlsx / .xls / .csv) terlebih dahulu');
+        }
+        return back();
     }
 }
