@@ -17,6 +17,7 @@ class CreateTableAkun extends Migration
             $table->integer('id_header')->unsigned();
             $table->string('kode_akun');
             $table->string('nama_akun');
+            $table->enum('status',['header','akun']);
             $table->timestamps();
         });
         Schema::table('transaksi_simpanan', function(Blueprint $table) {

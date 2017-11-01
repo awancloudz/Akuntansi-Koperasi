@@ -13,9 +13,9 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Header</th>
 				<th>Kode Akun</th>
-				<th>Nama Akun</th>				
+				<th>Nama Akun</th>
+				<th>Grup Kategori</th>				
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -23,9 +23,9 @@
 			<?php $i=0; ?>
 			<?php foreach($daftarakun as $akun): ?>
 			<tr>
-				<td>{{ $akun->header->kode_header }} - {{ $akun->header->nama_header }}</td>
 				<td>{{ $akun->kode_akun}}</td>
-				<td>{{ $akun->nama_akun }}</td>				
+				<td>{{ $akun->nama_akun }}</td>
+				<td>{{ $akun->header->nama_header }}</td>				
 				<td>
 					<div class="box-button">
 					{{ link_to('akun/' . $akun->id . '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}

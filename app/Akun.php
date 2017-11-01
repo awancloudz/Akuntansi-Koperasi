@@ -12,7 +12,8 @@ class Akun extends Model
     protected $fillable = [
     	'id_header',
     	'kode_akun',
-    	'nama_akun',
+        'nama_akun',
+        'status',
     	'created_at',
         'updated_at'
     ];

@@ -2,19 +2,18 @@
 
 @section('main')
 <div id="header" class="panel panel-default">
-	<div class="panel-heading"><b><h4>Data Header</h4></b></div>
+	<div class="panel-heading"><b><h4>Data Grup Kategori</h4></b></div>
 	<div class="panel-body">
 	@include('_partial.flash_message')
-	@include('header.form_pencarian')
 	<div class="tombol-nav">
-		{{ link_to('header/create','Tambah Header',['class' => 'btn btn-primary']) }}
+		{{ link_to('header/create','Tambah Kategori',['class' => 'btn btn-primary']) }}
 	</div><br><br><br>
 	@if (count($daftarheader) > 0)
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Kode Header</th>
-				<th>Nama Header</th>				
+				<th>Kode Kategori</th>
+				<th>Nama Kategori</th>				
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -39,11 +38,11 @@
 		</tbody>
 	</table>
 	@else
-	<p>Tidak ada data header.</p>
+	<p>Tidak ada data kategori.</p>
 	@endif
 	<div class="table-nav">
 	<div class="jumlah-data">
-		<strong>Jumlah Header : {{ $jumlahheader}}</strong>
+		<strong>Jumlah Kategori : {{ $jumlahheader}}</strong>
 	</div>
 	<div class="paging">
 	{{ $daftarheader->links() }}

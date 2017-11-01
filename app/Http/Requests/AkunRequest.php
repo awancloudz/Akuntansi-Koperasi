@@ -33,6 +33,7 @@ class AkunRequest extends Request
             'kode_akun' => $kodeakun_rules,
             'id_header' => 'required',
             'nama_akun' => 'required|string|max:50',
+            'status' => 'required',
         ];
     }
 }

@@ -4,14 +4,26 @@
 
 {{-- Kode Header --}}
 <div class="form-group">
-{!! Form::label('id_header','Header',['class' => 'control-label']) !!}
+{!! Form::label('id_header','Grup Kategori',['class' => 'control-label']) !!}
 @if(count($list_header) > 0)
-{!! Form::select('id_header', $list_header, null,['class' => 'form-control js-example-basic-single', 'id'=>'id_header','placeholder'=>'Pilih Header']) !!}
+{!! Form::select('id_header', $list_header, null,['class' => 'form-control js-example-basic-single', 'id'=>'id_header','placeholder'=>'Pilih Kategori']) !!}
 @else
-<p>Tidak ada pilihan keanggotaan,silahkan buat dulu.</p>
+<p>Tidak ada pilihan grup kategori,silahkan buat dulu.</p>
 @endif
 @if ($errors->has('id_header'))
 <span class="help-block">{{ $errors->first('id_header') }}</span>
+@endif
+</div>
+
+{{-- Jenis Akun --}}
+<div class="form-group">
+{!! Form::label('status','Jenis Akun',['class' => 'control-label']) !!}
+<select name="status" class="form-control js-example-basic-single">
+<option value="header">Header</option>
+<option value="akun">Akun Murni</option>
+</select>
+@if ($errors->has('status'))
+<span class="help-block">{{ $errors->first('status') }}</span>
 @endif
 </div>
 

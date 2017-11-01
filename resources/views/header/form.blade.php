@@ -8,7 +8,7 @@
 @else
 <div class="form-group">
 @endif
-{!! Form::label('kode_header','Kode Header',['class' => 'control-label']) !!}
+{!! Form::label('kode_header','Kode Kategori',['class' => 'control-label']) !!}
 {!! Form::text('kode_header', null,['class' => 'form-control']) !!}
 @if ($errors->has('kode_header'))
 <span class="help-block">{{ $errors->first('kode_header') }}</span>
@@ -21,7 +21,7 @@
 @else
 <div class="form-group">
 @endif
-{!! Form::label('nama_header','Nama Header',['class' => 'control-label']) !!}
+{!! Form::label('nama_header','Nama Kategori',['class' => 'control-label']) !!}
 {!! Form::text('nama_header', null,['class' => 'form-control']) !!}
 @if ($errors->has('nama_header'))
 <span class="help-block">{{ $errors->first('nama_header') }}</span>

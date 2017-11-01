@@ -19,10 +19,10 @@
 		 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data Master<span class="caret"></span></a>
 		 		<ul class="dropdown-menu" role="menu">
                     @if (!empty($halaman) && $halaman == 'header')
-					<li class="active"><a href="{{ url('header') }}">Data Header</a>
+					<li class="active"><a href="{{ url('header') }}">Grup Kategori</a>
 					<span class="sr-only">(current)</span></li>
 					@else
-					<li><a href="{{ url('header') }}">Data Header</a></li>
+					<li><a href="{{ url('header') }}">Grup Kategori</a></li>
 					@endif
 					@if (!empty($halaman) && $halaman == 'akun')
 					<li class="active"><a href="{{ url('akun') }}">Data Akun</a>

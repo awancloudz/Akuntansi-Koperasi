@@ -14,8 +14,9 @@ class CreateTableTransaksiSemua extends Migration
     {
         Schema::create('transaksi_semua', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kodetransaksi',50)->unique();
             $table->integer('id_akun')->unsigned();
+            $table->integer('id_jurnal_umum')->unsigned();
+            $table->string('kodetransaksi',50);
             $table->date('tanggal');
             $table->double('nominal');
             $table->text('keterangan');
