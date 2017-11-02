@@ -20,13 +20,22 @@
 @endif
 </div>
 
-{{-- Jenis Transaksi --}}
+{{-- Jenis Simpananan --}}
+@if($errors->any())
+<div class="form-group {{ $errors->has('jenis_simpanan') ? 'has-error' : 'has-success' }}"></div>
+@else
 <div class="form-group">
-{!! Form::label('status','Jenis Transaksi',['class' => 'control-label']) !!}
-<select name="status" class="form-control js-example-basic-single">
-<option value="debit">Penerimaan</option>
-<option value="kredit">Pengeluaran</option>
-</select>
+@endif
+{!! Form::label('status','Jenis Transaksi',['class' => 'control-label','id' => 'jenis_simpanan']) !!}
+<div class="radio">
+<label>
+{!! Form::radio('status','debit') !!} Penerimaan
+</label>
+</div>
+<div class="radio">
+<label>{!! Form::radio('status','kredit') !!} Pengeluaran
+</label>
+</div>
 @if ($errors->has('status'))
 <span class="help-block">{{ $errors->first('status') }}</span>
 @endif

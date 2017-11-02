@@ -9,6 +9,7 @@ use App\Http\Requests\TransaksiSimpananRequest;
 
 use App\TransaksiSimpanan;
 use App\TransaksiSemua;
+use App\JurnalUmum;
 use App\Akun;
 use App\Nasabah;
 use App\Keanggotaan;
@@ -62,13 +63,33 @@ class TransaksipenarikanController extends Controller
         else{
         //Simpan Data Transaksi
         $transaksipenarikan = TransaksiSimpanan::create($input);
+        //Transaksi Input id jurnal
+        $jurnalumum = New JurnalUmum;
+        $jurnalumum->keterangan = "Penarikan Nasabah ( ID : ".$nasabah." )";
+        $jurnalumum->save();
+        //Seleksi id jurnal terakhir
+        $kodejurnal = JurnalUmum::orderBy('id', 'desc')->first();
+
         //Transaksi Semua
         $transaksisemua = New TransaksiSemua;
-        $transaksisemua->kodetransaksi = $request->kodetransaksi;
         $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
         $transaksisemua->tanggal = $request->tanggal;
         $transaksisemua->nominal = $request->nominal_simpan;
         $transaksisemua->keterangan = "Penarikan Nasabah";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "debit";
+        $transaksisemua->save();
+
+        //Transaksi Kas
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi."-KAS";
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_simpan;
+        $transaksisemua->keterangan = "Kas";
         $transaksisemua->id_users = $request->id_users;
         $transaksisemua->status = "kredit";
         $transaksisemua->save();

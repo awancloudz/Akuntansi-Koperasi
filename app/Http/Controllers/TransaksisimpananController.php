@@ -150,6 +150,19 @@ class TransaksisimpananController extends Controller
         $transaksisemua->nominal = $request->nominal_simpan;
         $transaksisemua->keterangan = "Simpanan Nasabah";
         $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "kredit";
+        $transaksisemua->update();
+        
+        //Transaksi update kas
+        $kodekas = $kodetrans."-KAS";
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodekas)->firstOrFail();
+        $transaksisemua->kodetransaksi = $request->kodetransaksi."-KAS";
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_simpan;
+        $transaksisemua->keterangan = "Kas";
+        $transaksisemua->id_users = $request->id_users;
         $transaksisemua->status = "debit";
         $transaksisemua->update();
         //End Transaksi Semua

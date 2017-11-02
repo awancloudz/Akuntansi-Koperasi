@@ -9,6 +9,7 @@ use App\Http\Requests\TransaksiPinjamanRequest;
 
 use App\TransaksiPinjaman;
 use App\TransaksiSemua;
+use App\JurnalUmum;
 use App\DetailAngsuran;
 use App\Akun;
 use App\Nasabah;
@@ -58,13 +59,34 @@ class TransaksipinjamanController extends Controller
         $input = $request->all();
         //Simpan Data Transaksi
         $transaksipinjaman = TransaksiPinjaman::create($input);
+
+        //Transaksi Input id jurnal
+        $jurnalumum = New JurnalUmum;
+        $jurnalumum->keterangan = "Pinjaman Nasabah ( ID : ".$request->id_nasabah." )";
+        $jurnalumum->save();
+        //Seleksi id jurnal terakhir
+        $kodejurnal = JurnalUmum::orderBy('id', 'desc')->first();
+
         //Transaksi Semua
         $transaksisemua = New TransaksiSemua;
-        $transaksisemua->kodetransaksi = $request->kodetransaksi;
         $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
         $transaksisemua->tanggal = $request->tanggal;
         $transaksisemua->nominal = $request->nominal_pinjam;
         $transaksisemua->keterangan = "Pinjaman Nasabah";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = "debit";
+        $transaksisemua->save();
+
+        //Transaksi Input ke Kas
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua->kodetransaksi = $request->kodetransaksi."-KAS";
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal_pinjam;
+        $transaksisemua->keterangan = "Kas";
         $transaksisemua->id_users = $request->id_users;
         $transaksisemua->status = "kredit";
         $transaksisemua->save();
@@ -118,17 +140,37 @@ class TransaksipinjamanController extends Controller
     {
         $input = $request->all();
         $angsuran->update($input);
+        //Transaksi Input id jurnal
+        $jurnalumum = New JurnalUmum;
+        $jurnalumum->keterangan = "Angsuran Nasabah";
+        $jurnalumum->save();
+        //Seleksi id jurnal terakhir
+        $kodejurnal = JurnalUmum::orderBy('id', 'desc')->first();
+
         //Transaksi Semua
         $idtrans = $angsuran->id_transaksi_pinjaman;
         $transaksipinjaman = New TransaksiPinjaman;
         $transaksipinjaman = TransaksiPinjaman::findOrFail($idtrans);
-
+        
         $transaksisemua = New TransaksiSemua;
         $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id;
         $transaksisemua->id_akun = $transaksipinjaman->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
         $transaksisemua->tanggal = $request->tanggal_bayar;
         $transaksisemua->nominal = $angsuran->total_bayar;
         $transaksisemua->keterangan = "Angsuran Nasabah";
+        $transaksisemua->id_users = $transaksipinjaman->id_users;
+        $transaksisemua->status = "kredit";
+        $transaksisemua->save();
+
+        //Transaksi kas
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id."-KAS";
+        $transaksisemua->id_akun = $transaksipinjaman->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua->tanggal = $request->tanggal_bayar;
+        $transaksisemua->nominal = $angsuran->total_bayar;
+        $transaksisemua->keterangan = "Kas";
         $transaksisemua->id_users = $transaksipinjaman->id_users;
         $transaksisemua->status = "debit";
         $transaksisemua->save();
