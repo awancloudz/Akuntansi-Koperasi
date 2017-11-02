@@ -10,8 +10,9 @@ class TransaksiSemua extends Model
 
     //Hanya jika semua data disimpan tanpa seleksi
     protected $fillable = [
-        'kodetransaksi',
         'id_akun',
+        'id_jurnalumum',
+        'kodetransaksi',
     	'tanggal',
     	'nominal',    	
     	'keterangan',
@@ -28,4 +29,8 @@ class TransaksiSemua extends Model
     public function akun(){
         return $this->belongsTo('App\Akun', 'id_akun');
     }
+    public function jurnalumum(){
+        return $this->belongsTo('App\JurnalUmum', 'id_jurnalumum');
+    }
+
 }

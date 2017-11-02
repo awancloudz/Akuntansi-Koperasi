@@ -127,7 +127,7 @@ class TransaksipinjamanController extends Controller
         $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id;
         $transaksisemua->id_akun = $transaksipinjaman->id_akun;
         $transaksisemua->tanggal = $request->tanggal_bayar;
-        $transaksisemua->nominal = $angsuran->angsuran;
+        $transaksisemua->nominal = $angsuran->total_bayar;
         $transaksisemua->keterangan = "Angsuran Nasabah";
         $transaksisemua->id_users = $transaksipinjaman->id_users;
         $transaksisemua->status = "debit";
