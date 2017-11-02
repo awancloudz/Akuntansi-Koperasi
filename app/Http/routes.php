@@ -48,7 +48,10 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('detailangsuran','DetailangsuranController');
     Route::get('transaksiumum/cari','TransaksiumumController@cari');
     Route::resource('transaksiumum','TransaksiumumController');
-    Route::resource('transaksisemua','TransaksisemuaController');    
+    Route::resource('transaksisemua','TransaksisemuaController');   
+    
+    //LAPORAN
+    Route::resource('jurnalumum','JurnalUmumController');
 });
 
 
