@@ -147,22 +147,9 @@ class TransaksipinjamanController extends Controller
         //Seleksi id jurnal terakhir
         $kodejurnal = JurnalUmum::orderBy('id', 'desc')->first();
 
-        //Transaksi Semua
         $idtrans = $angsuran->id_transaksi_pinjaman;
         $transaksipinjaman = New TransaksiPinjaman;
         $transaksipinjaman = TransaksiPinjaman::findOrFail($idtrans);
-        
-        $transaksisemua = New TransaksiSemua;
-        $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id;
-        $transaksisemua->id_akun = $transaksipinjaman->id_akun;
-        $transaksisemua->id_jurnalumum = $kodejurnal->id;
-        $transaksisemua->tanggal = $request->tanggal_bayar;
-        $transaksisemua->nominal = $angsuran->total_bayar;
-        $transaksisemua->keterangan = "Angsuran Nasabah";
-        $transaksisemua->id_users = $transaksipinjaman->id_users;
-        $transaksisemua->status = "kredit";
-        $transaksisemua->save();
-
         //Transaksi kas
         $transaksisemua = New TransaksiSemua;
         $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id."-KAS";
@@ -173,6 +160,18 @@ class TransaksipinjamanController extends Controller
         $transaksisemua->keterangan = "Kas";
         $transaksisemua->id_users = $transaksipinjaman->id_users;
         $transaksisemua->status = "debit";
+        $transaksisemua->save();
+
+        //Transaksi Semua
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id;
+        $transaksisemua->id_akun = $transaksipinjaman->id_akun;
+        $transaksisemua->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua->tanggal = $request->tanggal_bayar;
+        $transaksisemua->nominal = $angsuran->total_bayar;
+        $transaksisemua->keterangan = "Angsuran Nasabah";
+        $transaksisemua->id_users = $transaksipinjaman->id_users;
+        $transaksisemua->status = "kredit";
         $transaksisemua->save();
         //End Transaksi Semua
         Session::flash('flash_message', 'Angsuran sudah dibayar');

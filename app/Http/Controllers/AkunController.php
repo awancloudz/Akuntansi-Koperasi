@@ -22,7 +22,7 @@ class AkunController extends Controller
      */
     public function index()
     {
-        $daftarakun = Akun::orderBy('id', 'asc')->paginate(50);
+        $daftarakun = Akun::orderBy('kode_akun', 'asc')->paginate(50);
         $jumlahakun = Akun::count();
         return view('akun.index', compact('daftarakun','jumlahakun'));
     }

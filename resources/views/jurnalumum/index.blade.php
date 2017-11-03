@@ -4,6 +4,7 @@
 <div id="jurnalumum" class="panel panel-default">
 	<div class="panel-heading"><b><h4>Jurnal Umum</h4></b></div>
 	<div class="panel-body">
+	@include('jurnalumum.form_pencarian')
 	@if (count($daftarjurnal) > 0)
 	<table class="table table-bordered">
 		<thead>
@@ -16,12 +17,14 @@
 		</thead>
 		<tbody>
 			<?php foreach($daftarjurnal as $jurnal): ?>
-			<tr align="center">
+			<tr align="center"> 
 				<td>{{ $jurnal->tanggal }}</td>
-				<td>{{ $jurnal->keterangan }}</td>
 				@if($jurnal->status == 'debit')
+				<td align="left">{{ $jurnal->keterangan }}</td>
 				<td align="right">{{ $jurnal->nominal }}</td><td></td>
 				@elseif($jurnal->status == 'kredit')
+				<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				{{ $jurnal->keterangan }}</td>
 				<td></td><td align="right">{{ $jurnal->nominal }}</td>
 				@endif
 			</tr>

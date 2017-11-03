@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="witdh=device-witdh, initial-scale=1">
 	<title>Sistem Informasi Akuntansi Koperasi</title>
+<script src="{{ asset ('js/moment.min.js')}}"></script>
 <link href="{{ asset ('bootstrap_3_3_6/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ asset ('css/style.css')}}" rel="stylesheet">
 <script src="{{ asset ('js/jquery_2_2_1.min.js')}}"></script>
@@ -22,6 +23,8 @@
 @include ('navbar')
 @yield ('main')
 @yield ('footer')
+<script src="{{ asset ('js/daterangepicker.js')}}"></script>
+<link href="{{ asset ('css/daterangepicker.css')}}" rel="stylesheet"></script>
 <script src="{{ asset ('bootstrap_3_3_6/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset ('js/laravelapp.js')}}"></script>
 </body>

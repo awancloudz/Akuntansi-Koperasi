@@ -95,4 +95,17 @@ class JurnalUmumController extends Controller
     {
         //
     }
+    //pencarian
+    public function cari(Request $request){
+        $tgl_awal = $request->tgl_awal;    //Ambil value dari inputan pencarian
+        $tgl_akhir = $request->tgl_akhir;
+        if(!empty($tgl_awal)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            //$daftarjurnal = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir]);
+            $daftarjurnal = DB::table('transaksi_semua')->whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            $jumlahjurnal= "-";
+            return view('jurnalumum.index', compact('daftarjurnal','jumlahjurnal'));
+        }
+        return redirect('jurnalumum');
+    }
 }

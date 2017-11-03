@@ -84,21 +84,29 @@ class TransaksiumumController extends Controller
         $transaksisemua->keterangan = $request->keterangan;
         $transaksisemua->id_users = $request->id_users;
         $transaksisemua->status = $status_simpan;
-        $transaksisemua->save();
+        //$transaksisemua->save();
         
         //Transaksi Input Data Kas
-        $transaksisemua = New TransaksiSemua;
-        $transaksisemua->id_akun = $request->id_akun;
-        $transaksisemua->id_jurnalumum = $kodejurnal->id;
-        $transaksisemua->kodetransaksi = $request->kodetransaksi."-KAS";
-        $transaksisemua->tanggal = $request->tanggal;
-        $transaksisemua->nominal = $request->nominal;
-        $transaksisemua->keterangan = "Kas";
-        $transaksisemua->id_users = $request->id_users;
-        $transaksisemua->status = $status_kas;
-        $transaksisemua->save();
+        $transaksisemua2 = New TransaksiSemua;
+        $transaksisemua2->id_akun = $request->id_akun;
+        $transaksisemua2->id_jurnalumum = $kodejurnal->id;
+        $transaksisemua2->kodetransaksi = $request->kodetransaksi."-KAS";
+        $transaksisemua2->tanggal = $request->tanggal;
+        $transaksisemua2->nominal = $request->nominal;
+        $transaksisemua2->keterangan = "Kas";
+        $transaksisemua2->id_users = $request->id_users;
+        $transaksisemua2->status = $status_kas;
+        //$transaksisemua2->save();
         //End Transaksi Semua
 
+        if($status == 'debit'){
+            $transaksisemua2->save();
+            $transaksisemua->save();
+        }
+        else{
+            $transaksisemua->save();
+            $transaksisemua2->save();
+        }
         Session::flash('flash_message', 'Data Transaksi Berhasil Disimpan');
         return redirect('transaksiumum');
     }
@@ -155,12 +163,15 @@ class TransaksiumumController extends Controller
     public function destroy(TransaksiUmum $transaksiumum)
     {
         $transaksiumum->delete();
-        //Transaksi Semua
+        //Seleksi ID Jurnal
         $kodetrans = $transaksiumum->kodetransaksi;
         $transaksisemua = New TransaksiSemua;
         $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodetrans)->firstOrFail();
-        $transaksisemua->delete();
-        //End Transaksi Semua
+        //Hapus Jurnal
+        $kodejurnal = $transaksisemua->id_jurnalumum;
+        $jurnal = JurnalUmum::where('id', $kodejurnal)->firstOrFail();
+        $jurnal->delete();
+        //End Hapus Jurnal
         Session::flash('flash_message', 'Data Transaksi berhasil dihapus');
         Session::flash('Penting', true);        
         return redirect('transaksiumum');

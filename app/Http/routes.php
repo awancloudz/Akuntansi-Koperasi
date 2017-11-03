@@ -51,6 +51,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('transaksisemua','TransaksisemuaController');   
     
     //LAPORAN
+    Route::get('jurnalumum/cari','JurnalUmumController@cari');
     Route::resource('jurnalumum','JurnalUmumController');
 });
 
