@@ -1,5 +1,5 @@
 <div id="pencarian">
-	{!! Form::open(['url' => 'jurnalumum/cari', 'method' => 'GET', 'id' => 'form_pencarian']) !!}
+	{!! Form::open(['url' => 'lapsimpanan/cari', 'method' => 'GET', 'id' => 'form_pencarian']) !!}
 <div class="row">
 	<div class="col-md-6">
 		<div class="input-group">
@@ -18,10 +18,10 @@
 	</div>
 	<div class="col-md-6">
 		<div class="box-button">
-		{{ link_to('jurnalumum/cetak','Cetak Jurnal Umum',['class' => 'btn btn-primary','target'=>'_blank']) }}
+		{{ link_to('lapsimpanan/cetak','Cetak Simpanan',['class' => 'btn btn-primary','target'=>'_blank']) }}
 		</div>
 		<div class="box-button">
-		{{ link_to('jurnalumum/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
+		{{ link_to('lapsimpanan/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
 		</div>
 	</div>
 </div>
@@ -29,15 +29,6 @@
 </div>
 <script type="text/javascript">
 $(function() {
-	/*$('#tanggaljurnal').daterangepicker({
-		locale: { applyLabel: 'OK', cancelLabel: 'Batal' }  
-	});
-	$('#tanggaljurnal').on('apply.daterangepicker', function(ev, picker) {
-		console.log(picker.startDate.format('YYYY-MM-DD'));
-		console.log(picker.endDate.format('YYYY-MM-DD'));
-		document.getElementById("tgl_awal").value = picker.startDate.format('YYYY-MM-DD');
-		document.getElementById("tgl_akhir").value = picker.endDate.format('YYYY-MM-DD');
-	});*/
 
 	var start = moment().startOf('month');
     var end = moment().endOf('month');

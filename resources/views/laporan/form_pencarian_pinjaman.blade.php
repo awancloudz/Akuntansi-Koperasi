@@ -1,5 +1,5 @@
 <div id="pencarian">
-	{!! Form::open(['url' => 'jurnalumum/cari', 'method' => 'GET', 'id' => 'form_pencarian']) !!}
+	{!! Form::open(['url' => 'lappinjaman/cari', 'method' => 'GET', 'id' => 'form_pencarian']) !!}
 <div class="row">
 	<div class="col-md-6">
 		<div class="input-group">
@@ -18,10 +18,10 @@
 	</div>
 	<div class="col-md-6">
 		<div class="box-button">
-		{{ link_to('jurnalumum/cetak','Cetak Jurnal Umum',['class' => 'btn btn-primary','target'=>'_blank']) }}
+		{{ link_to('lappinjaman/cetak','Cetak Pinjaman',['class' => 'btn btn-primary','target'=>'_blank']) }}
 		</div>
 		<div class="box-button">
-		{{ link_to('jurnalumum/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
+		{{ link_to('lappinjaman/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
 		</div>
 	</div>
 </div>

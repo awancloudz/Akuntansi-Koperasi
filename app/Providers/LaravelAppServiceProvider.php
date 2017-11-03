@@ -48,6 +48,20 @@ class LaravelAppServiceProvider extends ServiceProvider
             $halaman = 'detailangsuran';
         }
 
+        //LAPORAN
+        if(Request::segment(1) == 'jurnalumum'){
+            $halaman = 'jurnalumum';
+        }
+        if(Request::segment(1) == 'lapsimpanan'){
+            $halaman = 'lapsimpanan';
+        }
+        if(Request::segment(1) == 'lappinjaman'){
+            $halaman = 'lappinjaman';
+        }
+        if(Request::segment(1) == 'lapumum'){
+            $halaman = 'lapumum';
+        }
+
         view()->share('halaman', $halaman);
     }
 

@@ -82,18 +82,6 @@
 					@else
 					<li><a href="{{ url('jurnalumum') }}">Jurnal Umum</a></li>
 					@endif
-					@if (!empty($halaman) && $halaman == 'bukukas')
-					<li class="active"><a href="{{ url('bukukasumum') }}">Buku Kas </a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('bukukas') }}">Buku Kas </a></li>
-					@endif
-					@if (!empty($halaman) && $halaman == 'bukubank')
-					<li class="active"><a href="{{ url('bukubank') }}">Buku Bank</a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('bukubank') }}">Buku Bank</a></li>
-					@endif
 					@if (!empty($halaman) && $halaman == 'lapsimpanan')
 					<li class="active"><a href="{{ url('lapsimpanan') }}"> Simpanan</a>
 					<span class="sr-only">(current)</span></li>
@@ -105,6 +93,12 @@
 					<span class="sr-only">(current)</span></li>
 					@else
 					<li><a href="{{ url('lappinjaman') }}"> Pinjaman</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'lapumum')
+					<li class="active"><a href="{{ url('lapumum') }}"> Transaksi Umum</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('lapumum') }}"> Transaksi Umum</a></li>
 					@endif
 					@if (!empty($halaman) && $halaman == 'shu')
 					<li class="active"><a href="{{ url('shu') }}">SHU</a>

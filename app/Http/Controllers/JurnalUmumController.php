@@ -26,8 +26,7 @@ class JurnalUmumController extends Controller
         }
         $daftar = TransaksiSemua::all();
         $daftarjurnal = $daftar->where('id_users',$iduser);
-        $jumlahjurnal = $daftarjurnal->count();
-        return view('jurnalumum.index', compact('daftarjurnal','jumlahjurnal'));
+        return view('jurnalumum.index', compact('daftarjurnal'));
     }
 
     /**
@@ -102,9 +101,8 @@ class JurnalUmumController extends Controller
         if(!empty($tgl_awal)){                        //Jika kata kunci tidak kosong, maka... 
             //Query
             //$daftarjurnal = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir]);
-            $daftarjurnal = DB::table('transaksi_semua')->whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
-            $jumlahjurnal= "-";
-            return view('jurnalumum.index', compact('daftarjurnal','jumlahjurnal'));
+            $daftarjurnal = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            return view('jurnalumum.index', compact('daftarjurnal'));
         }
         return redirect('jurnalumum');
     }

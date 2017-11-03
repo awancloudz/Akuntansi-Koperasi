@@ -35,10 +35,6 @@
 	<p>Tidak ada data transaksi.</p>
 	@endif
 	<div class="table-nav">
-	<div class="jumlah-data">
-		<strong>Jumlah Transaksi : {{ $jumlahjurnal  }}</strong>
-	</div>
-	
 	</div>
 
 	</div>

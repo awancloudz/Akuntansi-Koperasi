@@ -53,6 +53,11 @@ Route::group(['middleware' => ['web']], function(){
     //LAPORAN
     Route::get('jurnalumum/cari','JurnalUmumController@cari');
     Route::resource('jurnalumum','JurnalUmumController');
+    Route::get('lapsimpanan/cari','LaporanController@carisimpanan');
+    Route::get('lapsimpanan','LaporanController@simpanan');
+    Route::get('lappinjaman/cari','LaporanController@caripinjaman');
+    Route::get('lappinjaman','LaporanController@pinjaman');
+    Route::get('lapumum','LaporanController@umum');
 });
 
 
