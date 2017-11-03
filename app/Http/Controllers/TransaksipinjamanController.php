@@ -30,8 +30,8 @@ class TransaksipinjamanController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiPinjaman::all();
-        $daftarpinjaman = $daftar->where('id_users',$iduser);
+        //$daftar = TransaksiPinjaman::all();
+        $daftarpinjaman = TransaksiPinjaman::where('id_users',$iduser)->paginate(20);
         $jumlahpinjaman = $daftarpinjaman->count();
         return view('transaksipinjaman.index', compact('daftarpinjaman','jumlahpinjaman'));
     }

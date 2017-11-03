@@ -51,7 +51,9 @@
 	<div class="jumlah-data">
 		<strong>Jumlah Transaksi : {{ $jumlahumum }}</strong>
 	</div>
-	
+	<div class="paging">
+	{{ $daftarumum->links() }}
+	</div>
 	</div>
 
 	</div>

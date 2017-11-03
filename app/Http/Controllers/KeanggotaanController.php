@@ -23,8 +23,8 @@ class KeanggotaanController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = Keanggotaan::all();
-        $daftarkeanggotaan = $daftar->where('id_users',$iduser);
+        //$daftar = Keanggotaan::all();
+        $daftarkeanggotaan = Keanggotaan::where('id_users',$iduser)->paginate(20);
         $jumlahkeanggotaan = $daftarkeanggotaan->count();
         return view('keanggotaan.index', compact('daftarkeanggotaan','jumlahkeanggotaan'));
     }

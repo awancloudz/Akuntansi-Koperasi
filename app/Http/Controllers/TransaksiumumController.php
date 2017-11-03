@@ -26,8 +26,8 @@ class TransaksiumumController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiUmum::all();
-        $daftarumum = $daftar->where('id_users',$iduser);
+        //$daftar = TransaksiUmum::all();
+        $daftarumum = TransaksiUmum::where('id_users',$iduser)->paginate(20);
         $jumlahumum = $daftarumum->count();
         return view('transaksiumum.index', compact('daftarumum','jumlahumum'));
     }

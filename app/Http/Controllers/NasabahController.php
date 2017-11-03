@@ -29,8 +29,8 @@ class NasabahController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = Nasabah::all();
-        $daftarnasabah = $daftar->where('id_users',$iduser);
+        //$daftar = Nasabah::all();
+        $daftarnasabah = Nasabah::where('id_users',$iduser)->paginate(20);
         $jumlahnasabah = $daftarnasabah->count();
         return view('nasabah.index', compact('daftarnasabah','jumlahnasabah'));
     }
@@ -113,8 +113,8 @@ class NasabahController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiPinjaman::all();
-        $daftarpinjaman = $daftar->where('id_nasabah',$nasabah->id,'id_users',$iduser);
+        //$daftar = TransaksiPinjaman::all();
+        $daftarpinjaman = TransaksiPinjaman::where('id_nasabah',$nasabah->id)->where('id_users',$iduser)->paginate(20);
         $jumlahpinjaman = $daftarpinjaman->count();
         return view('nasabah.pinjaman',compact('nasabah','daftarpinjaman','jumlahpinjaman'));
     }

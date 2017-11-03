@@ -55,7 +55,9 @@
 	<div class="jumlah-data">
 		<strong>Jumlah Keanggotan : {{ $jumlahkeanggotaan}}</strong>
 	</div>
-	
+	<div class="paging">
+	{{ $daftarkeanggotaan->links() }}
+	</div>
 	</div>
 
 	</div>

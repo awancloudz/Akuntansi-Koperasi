@@ -59,7 +59,9 @@
 	<div class="jumlah-data">
 		<strong>Jumlah Nasabah : {{ $jumlahnasabah}}</strong>
 	</div>
-	
+	<div class="paging">
+	{{ $daftarnasabah->links() }}
+	</div>
 	</div>
 
 	</div>

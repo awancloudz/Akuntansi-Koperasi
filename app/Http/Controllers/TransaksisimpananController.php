@@ -28,8 +28,8 @@ class TransaksisimpananController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiSimpanan::all();
-        $daftarsimpanan = $daftar->where('status','debit','id_users',$iduser);
+        //$daftar = TransaksiSimpanan::all();
+        $daftarsimpanan = TransaksiSimpanan::where('status','debit')->where('id_users',$iduser)->paginate(20);
         $jumlahsimpanan = $daftarsimpanan->count();
         return view('transaksisimpanan.index', compact('daftarsimpanan','jumlahsimpanan'));
     }
