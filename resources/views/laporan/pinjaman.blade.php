@@ -7,26 +7,25 @@
 	@include('laporan.form_pencarian_pinjaman')
 	@if (count($daftarpinjaman) > 0)
 	<table class="table table-bordered">
-		<thead>
-			<th>Kode Transaksi</th>
-			<th>Id Akun</th>
-			<th>Nama Nasabah</th>
-			<th>Tanggal</th>
-			<th>Nominal Pinjam</th>	
-			<th>Kali Angsuran</th>
-			<th>Nominal Angsuran</th>
-			<th>Saldo</th>
-		</thead>
+		<tr align="center">
+			<td><b>Kode Transaksi</td>
+			<td><b>Id Akun</td>
+			<td><b>Nama Nasabah</td>
+			<td><b>Tanggal</td>
+			<td><b>Nominal Pinjam</td>	
+			<td><b>Kali Angsuran</td>
+			<td><b>Nominal Angsuran</td>
+		</tr>
 		<tbody>
 		<?php foreach($daftarpinjaman as $pinjaman): ?>
-		<tr>
+		<tr align="center">
 			<td>{{ $pinjaman->kodetransaksi }}</td>
 			<td>{{ $pinjaman->akun->nama_akun }}</td>
 			<td>{{ $pinjaman->nasabah->nama }}</td>
 			<td>{{ $pinjaman->tanggal }}</td>
-			<td>{{ $pinjaman->nominal_pinjam }}</td>
+			<td align="right">{{ $pinjaman->nominal_pinjam }}</td>
 			<td>{{ $pinjaman->kali_angsuran }}</td>	
-			<td>{{ $pinjaman->nominal_angsuran }}</td>	
+			<td align="right">{{ $pinjaman->nominal_angsuran }}</td>	
 		</tr>
 		<?php endforeach ?>
 		</tbody>
@@ -34,9 +33,6 @@
 	@else
 	<p>Tidak ada data transaksi.</p>
 	@endif
-	<div class="table-nav">
-	</div>
-
 	</div>
 </div>
 @stop

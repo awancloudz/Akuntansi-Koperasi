@@ -34,9 +34,6 @@
 	@else
 	<p>Tidak ada data transaksi.</p>
 	@endif
-	<div class="table-nav">
-	</div>
-
 	</div>
 </div>
 @stop

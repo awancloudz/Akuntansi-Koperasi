@@ -57,6 +57,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('lapsimpanan','LaporanController@simpanan');
     Route::get('lappinjaman/cari','LaporanController@caripinjaman');
     Route::get('lappinjaman','LaporanController@pinjaman');
+    Route::get('lapumum/cari','LaporanController@cariumum');
     Route::get('lapumum','LaporanController@umum');
 });
 

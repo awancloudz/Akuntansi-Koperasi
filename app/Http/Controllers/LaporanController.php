@@ -64,7 +64,17 @@ class LaporanController extends Controller
         }
         $daftar = TransaksiUmum::all();
         $daftarumum = $daftar->where('id_users',$iduser);
-        $jumlahumum = $daftarumum->count();
-        return view('laporan.umum', compact('daftarumum','jumlahumum'));
+        return view('laporan.umum', compact('daftarumum'));
+    }
+    //pencarian
+    public function cariumum(Request $request){
+        $tgl_awal = $request->tgl_awal;    //Ambil value dari inputan pencarian
+        $tgl_akhir = $request->tgl_akhir;
+        if(!empty($tgl_awal)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $daftarumum = TransaksiUmum::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            return view('laporan.umum', compact('daftarumum'));
+        }
+        return redirect('laporan.umum');
     }
 }

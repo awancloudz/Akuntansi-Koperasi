@@ -7,16 +7,16 @@
 	@include('laporan.form_pencarian_simpanan')
 	@if (count($daftarsimpanan) > 0)
 	<table class="table table-bordered">
-		<thead>
-			<th>Kode Transaksi</th>
-			<th>Id Akun</th>
-			<th>Nama Nasabah</th>
-			<th>Tanggal</th>
-			<th>Jenis Simpanan</th>	
-			<th>Debet</th>
-			<th>Kredit</th>
-			<th>Saldo</th>
-		</thead>
+		<tr align="center">
+			<td><b>Kode Transaksi</td>
+			<td><b>Id Akun</td>
+			<td><b>Nama Nasabah</td>
+			<td><b>Tanggal</th>
+			<td><b>Jenis Simpanan</td>	
+			<td><b>Debet</td>
+			<td><b>Kredit</td>
+			<td><b>Saldo</td>
+		</tr>
 		<tbody>
 		<?php $saldo=0; ?>
 		<?php foreach($daftarsimpanan as $simpanan): ?>
@@ -42,9 +42,6 @@
 	@else
 	<p>Tidak ada data transaksi.</p>
 	@endif
-	<div class="table-nav">
-	</div>
-
 	</div>
 </div>
 @stop
