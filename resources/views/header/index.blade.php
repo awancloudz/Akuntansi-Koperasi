@@ -13,7 +13,8 @@
 		<thead>
 			<tr>
 				<th>Kode Kategori</th>
-				<th>Nama Kategori</th>				
+				<th>Nama Kategori</th>
+				<th>Grup</th>					
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -22,7 +23,8 @@
 			<?php foreach($daftarheader as $header): ?>
 			<tr>
 				<td>{{ $header->kode_header }}</td>
-				<td>{{ $header->nama_header }}</td>				
+				<td>{{ $header->nama_header }}</td>	
+				<td>{{ $header->grup->nama_grup }}</td>			
 				<td>
 					<div class="box-button">
 					{{ link_to('header/' . $header->id . '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}

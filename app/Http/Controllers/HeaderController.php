@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\HeaderRequest;
 
+use App\Grup;
 use App\Header;
 use App\Akun;
 use Session;

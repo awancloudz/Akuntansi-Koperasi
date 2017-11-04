@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableHeader extends Migration
+class CreateTableGrup extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,15 @@ class CreateTableHeader extends Migration
      */
     public function up()
     {
-        Schema::create('header', function(Blueprint $table) {
+        Schema::create('grup', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_grup')->unsigned();
-            $table->string('kode_header');
-            $table->string('nama_header');
+            $table->string('nama_grup',50);
             $table->timestamps();
         });
-        Schema::table('akun', function(Blueprint $table) {
-            $table->foreign('id_header')
+        Schema::table('header', function(Blueprint $table) {
+            $table->foreign('id_grup')
                 ->references('id')
-                ->on('header')
+                ->on('grup')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -35,9 +33,9 @@ class CreateTableHeader extends Migration
      */
     public function down()
     {
-        Schema::table('akun', function(Blueprint $table) {
-            $table->dropForeign('akun_id_header_foreign');
+        Schema::table('header', function(Blueprint $table) {
+            $table->dropForeign('header_id_grup_foreign');
         });
-        Schema::drop('header');
+        Schema::drop('grup');
     }
 }

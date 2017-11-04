@@ -30,6 +30,7 @@ class HeaderRequest extends Request
         $kodeheader_rules = 'required|string|max:50|unique:header,kode_header';
         }
         return [
+            'id_grup' => 'required',
             'kode_header' => $kodeheader_rules,
             'nama_header' => 'required|string|max:50',
         ];

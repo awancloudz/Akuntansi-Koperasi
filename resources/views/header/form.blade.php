@@ -2,6 +2,19 @@
 {!! Form::hidden('id', $header->id) !!}
 @endif
 
+{{-- Grup--}}
+<div class="form-group">
+{!! Form::label('id_grup','Grup Kategori',['class' => 'control-label']) !!}
+@if(count($list_grup) > 0)
+{!! Form::select('id_grup', $list_grup, null,['class' => 'form-control js-example-basic-single', 'id'=>'id_grup','placeholder'=>'Pilih Grup']) !!}
+@else 
+<p>Tidak ada pilihan grup kategori,silahkan buat dulu.</p>
+@endif
+@if ($errors->has('id_grup'))
+<span class="help-block">{{ $errors->first('id_grup') }}</span>
+@endif
+</div>
+
 {{-- Kode --}}
 @if($errors->any())
 <div class="form-group {{ $errors->has('kode_header') ? 'has-error' : 'has-success' }}"></div>
