@@ -9,6 +9,7 @@ use App\TransaksiSimpanan;
 use App\TransaksiPinjaman;
 use App\DetailAngsuran;
 use App\TransaksiUmum;
+use App\TransaksiSemua;
 use App\Akun;
 
 use Session;
@@ -76,5 +77,55 @@ class LaporanController extends Controller
             return view('laporan.umum', compact('daftarumum'));
         }
         return redirect('laporan.umum');
+    }
+    public function shu()
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = TransaksiSemua::all();
+        $daftarshu = $daftar->where('id_users',$iduser);
+        //Variabel
+        $pinjaman = 0;
+        $provisi = 0;
+        $beban = 0;
+        $gaji = 0;
+        $penyusutan = 0;
+        $pemakaian = 0;
+        foreach($daftarshu as $shu){
+            if($shu->keterangan == 'Kas'){
+                //Pinjaman
+                if($shu->akun->id_header == 12){
+                    $pinjaman = $pinjaman + $shu->nominal;
+                }
+                //Provisi
+                if($shu->akun->id_header == 13){
+                    $provisi = $provisi + $shu->nominal;
+                }
+                //Beban
+                if($shu->akun->id_header == 14){
+                    $beban = $beban + $shu->nominal;
+                }
+                //Gaji
+                if($shu->akun->id_header == 15){
+                    $gaji = $gaji + $shu->nominal;
+                }
+                //Penyusutan
+                if($shu->akun->id_header == 5){
+                    $penyusutan = $penyusutan + $shu->nominal;
+                }
+                //Penyusutan
+                if($shu->akun->id_header == 3){
+                    $pemakaian = $pemakaian + $shu->nominal;
+                }
+            }
+        }
+        $data = [
+        ['pinjaman' => $pinjaman, 'provisi' => $provisi, 'beban' => $beban, 'gaji' => $gaji, 'penyusutan' => $penyusutan, 'pemakaian' => $pemakaian],
+        ];   
+        $koleksi = collect($data);
+        $koleksi->toJson();
+        return $koleksi;
+        //return view('laporan.shu', compact('daftarshu'));
     }
 }
