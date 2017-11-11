@@ -144,11 +144,7 @@ class LaporanController extends Controller
         $netto = $bruto - $beban;
         $operasi = $gaji + $penyusutan + $pemakaian;
         $shutotal = $netto - $operasi;
-        /*$data =
-        ['pinjaman' => $pinjaman, 'provisi' => $provisi, 'beban' => $beban, 'gaji' => $gaji, 'penyusutan' => $penyusutan, 'pemakaian' => $pemakaian,
-        'bruto' => $bruto, 'netto' => $netto, 'operasi' => $operasi, 'shutotal' => $shutotal];   
-        $daftarshu = collect($data);
-        $daftarshu->toJson();*/
+        
         return view('laporan.shu', compact('daftarshu_','pinjaman','provisi','beban','gaji','penyusutan','pemakaian','bruto','netto','operasi','shutotal'));
     }
 
@@ -198,7 +194,7 @@ class LaporanController extends Controller
                     if($shu->akun->id_header == 5){
                         $penyusutan = $penyusutan + $shu->nominal;
                     }
-                    //Penyusutan
+                    //Pemakaian
                     if($shu->akun->id_header == 3){
                         $pemakaian = $pemakaian + $shu->nominal;
                     }
@@ -211,5 +207,255 @@ class LaporanController extends Controller
             return view('laporan.shu', compact('daftarshu_','pinjaman','provisi','beban','gaji','penyusutan','pemakaian','bruto','netto','operasi','shutotal'));
         }
         return redirect('laporan.shu');
+    }
+
+    public function neraca()
+    {
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        $daftar = TransaksiSemua::all();
+        $daftarneraca = $daftar->where('id_users',$iduser);
+
+        //Variabel SHU
+        $pinjaman = 0;
+        $provisi = 0;
+        $beban = 0;
+        $gaji = 0;
+        $penyusutan = 0;
+        $pemakaian = 0;
+        $bruto = 0;
+        $netto = 0;
+        $operasi = 0;
+        $shutotal = 0;
+        
+        //Variabel Neraca
+        $kas = 0;
+        $piutang = 0;
+        $peralatan = 0;
+        $hutangusaha = 0;
+        $simpanansukarela = 0;
+        $hutangbunga = 0;
+        $hutangbank = 0;
+        $simpananpokok = 0;
+        $simpananwajib = 0;
+        //Total Neraca 
+        $aktivalancar = 0;
+        $aktivatetap = 0;
+        $totalaktiva = 0;
+        $hutanglancar = 0;
+        $hutangjangkapanjang = 0;
+        $ekuitas = 0;
+        $totalpasiva = 0;
+
+        foreach($daftarneraca as $neraca){
+            if($neraca->keterangan == 'Kas'){
+            //SHU
+                //Pinjaman
+                if($neraca->akun->id_header == 12){
+                    $pinjaman = $pinjaman + $neraca->nominal;
+                }
+                //Provisi
+                if($neraca->akun->id_header == 13){
+                    $provisi = $provisi + $neraca->nominal;
+                }
+                //Beban
+                if($neraca->akun->id_header == 14){
+                    $beban = $beban + $neraca->nominal;
+                }
+                //Gaji
+                if($neraca->akun->id_header == 15){
+                    $gaji = $gaji + $neraca->nominal;
+                }
+                //Penyusutan
+                if($neraca->akun->id_header == 5){
+                    $penyusutan = $penyusutan + $neraca->nominal;
+                }
+                //Pemakaian
+                if($neraca->akun->id_header == 3){
+                    $pemakaian = $pemakaian + $neraca->nominal;
+                }
+            //NERACA
+                //Kas
+                if($neraca->akun->id_header == 1){
+                    $kas = $kas + $neraca->nominal;
+                }
+                //Piutang
+                if($neraca->akun->id_header == 2){
+                    $piutang = $piutang + $neraca->nominal;
+                }
+                //Peralatan
+                if($neraca->akun->id_header == 4){
+                    $peralatan = $peralatan + $neraca->nominal;
+                }
+                //Hutang Usaha
+                if($neraca->akun->id_header == 6){
+                    $hutangusaha = $hutangusaha + $neraca->nominal;
+                }
+                //Simpanan Sukarela
+                if($neraca->akun->id_header == 8){
+                    $simpanansukarela = $simpanansukarela + $neraca->nominal;
+                }
+                //Hutang Bunga
+                if($neraca->akun->id_header == 7){
+                    $hutangbunga = $hutangbunga + $neraca->nominal;
+                }
+                //Hutang Bank
+                if($neraca->akun->id_header == 7){
+                    $hutangbank = $hutangbank + $neraca->nominal;
+                }
+                //Simpanan Pokok
+                if($neraca->akun->id_header == 10){
+                    $simpananpokok = $simpananpokok + $neraca->nominal;
+                }
+                //Simpanan Wajib
+                if($neraca->akun->id_header == 10){
+                    $simpananwajib = $simpananwajib + $neraca->nominal;
+                }
+            }
+        }
+        //Total SHU
+        $bruto = $pinjaman + $provisi;
+        $netto = $bruto - $beban;
+        $operasi = $gaji + $penyusutan + $pemakaian;
+        $shutotal = $netto - $operasi;
+        //Total Neraca
+        $aktivalancar = $kas + $piutang + $pemakaian;
+        $aktivatetap = $peralatan - $penyusutan;
+        $totalaktiva = $aktivalancar + $aktivatetap;
+        $hutanglancar = $hutangusaha + $simpanansukarela + $hutangbunga;
+        $hutangjangkapanjang = $hutangbank;
+        $ekuitas = $simpananpokok + $simpananwajib + $shutotal;
+        $totalpasiva = $hutanglancar + $hutangjangkapanjang + $ekuitas;
+        return view('laporan.neraca', compact('daftarneraca','aktivalancar','aktivatetap','totalaktiva','hutanglancar','hutangjangkapanjang','ekuitas','totalpasiva','kas','piutang','pemakaian','penyusutan','peralatan','hutangusaha','simpanansukarela','hutangbunga','hutangbank','simpananpokok','simpananwajib','shutotal'));
+    }
+
+    //pencarian
+    public function carineraca(Request $request){
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+
+        $tgl_awal = $request->tgl_awal;    //Ambil value dari inputan pencarian
+        $tgl_akhir = $request->tgl_akhir;
+        if(!empty($tgl_awal)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $daftar = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            $daftarneraca = $daftar->where('id_users',$iduser);
+
+            //Variabel SHU
+            $pinjaman = 0;
+            $provisi = 0;
+            $beban = 0;
+            $gaji = 0;
+            $penyusutan = 0;
+            $pemakaian = 0;
+            $bruto = 0;
+            $netto = 0;
+            $operasi = 0;
+            $shutotal = 0;
+            
+            //Variabel Neraca
+            $kas = 0;
+            $piutang = 0;
+            $peralatan = 0;
+            $hutangusaha = 0;
+            $simpanansukarela = 0;
+            $hutangbunga = 0;
+            $hutangbank = 0;
+            $simpananpokok = 0;
+            $simpananwajib = 0;
+            //Total Neraca 
+            $aktivalancar = 0;
+            $aktivatetap = 0;
+            $totalaktiva = 0;
+            $hutanglancar = 0;
+            $hutangjangkapanjang = 0;
+            $ekuitas = 0;
+            $totalpasiva = 0;
+
+            foreach($daftarneraca as $neraca){
+                if($neraca->keterangan == 'Kas'){
+                //SHU
+                    //Pinjaman
+                    if($neraca->akun->id_header == 12){
+                        $pinjaman = $pinjaman + $neraca->nominal;
+                    }
+                    //Provisi
+                    if($neraca->akun->id_header == 13){
+                        $provisi = $provisi + $neraca->nominal;
+                    }
+                    //Beban
+                    if($neraca->akun->id_header == 14){
+                        $beban = $beban + $neraca->nominal;
+                    }
+                    //Gaji
+                    if($neraca->akun->id_header == 15){
+                        $gaji = $gaji + $neraca->nominal;
+                    }
+                    //Penyusutan
+                    if($neraca->akun->id_header == 5){
+                        $penyusutan = $penyusutan + $neraca->nominal;
+                    }
+                    //Pemakaian
+                    if($neraca->akun->id_header == 3){
+                        $pemakaian = $pemakaian + $neraca->nominal;
+                    }
+                //NERACA
+                    //Kas
+                    if($neraca->akun->id_header == 1){
+                        $kas = $kas + $neraca->nominal;
+                    }
+                    //Piutang
+                    if($neraca->akun->id_header == 2){
+                        $piutang = $piutang + $neraca->nominal;
+                    }
+                    //Peralatan
+                    if($neraca->akun->id_header == 4){
+                        $peralatan = $peralatan + $neraca->nominal;
+                    }
+                    //Hutang Usaha
+                    if($neraca->akun->id_header == 6){
+                        $hutangusaha = $hutangusaha + $neraca->nominal;
+                    }
+                    //Simpanan Sukarela
+                    if($neraca->akun->id_header == 8){
+                        $simpanansukarela = $simpanansukarela + $neraca->nominal;
+                    }
+                    //Hutang Bunga
+                    if($neraca->akun->id_header == 7){
+                        $hutangbunga = $hutangbunga + $neraca->nominal;
+                    }
+                    //Hutang Bank
+                    if($neraca->akun->id_header == 7){
+                        $hutangbank = $hutangbank + $neraca->nominal;
+                    }
+                    //Simpanan Pokok
+                    if($neraca->akun->id_header == 10){
+                        $simpananpokok = $simpananpokok + $neraca->nominal;
+                    }
+                    //Simpanan Wajib
+                    if($neraca->akun->id_header == 10){
+                        $simpananwajib = $simpananwajib + $neraca->nominal;
+                    }
+                }
+            }
+            //Total SHU
+            $bruto = $pinjaman + $provisi;
+            $netto = $bruto - $beban;
+            $operasi = $gaji + $penyusutan + $pemakaian;
+            $shutotal = $netto - $operasi;
+            //Total Neraca
+            $aktivalancar = $kas + $piutang + $pemakaian;
+            $aktivatetap = $peralatan - $penyusutan;
+            $totalaktiva = $aktivalancar + $aktivatetap;
+            $hutanglancar = $hutangusaha + $simpanansukarela + $hutangbunga;
+            $hutangjangkapanjang = $hutangbank;
+            $ekuitas = $simpananpokok + $simpananwajib + $shutotal;
+            $totalpasiva = $hutanglancar + $hutangjangkapanjang + $ekuitas;
+
+            return view('laporan.neraca', compact('daftarneraca','aktivalancar','aktivatetap','totalaktiva','hutanglancar','hutangjangkapanjang','ekuitas','totalpasiva','kas','piutang','pemakaian','penyusutan','peralatan','hutangusaha','simpanansukarela','hutangbunga','hutangbank','simpananpokok','simpananwajib','shutotal'));            
+        }
+        return redirect('laporan.neraca');
     }
 }

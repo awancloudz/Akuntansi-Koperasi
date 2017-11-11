@@ -23,7 +23,7 @@
 		<td coslpan="3"><b># Beban Pokok : </b></td>
 	</tr>
 	<tr>
-		<td>&nbsp;&nbsp; - Beban Bunga </td><td></td><td align="right">( {{ $beban }} )</td>
+		<td>&nbsp;&nbsp; - Beban Bunga </td><td></td><td align="right">{{ $beban }}</td>
 	</tr>
 	<tr>
 		<td><b># Partisipasi Netto Anggota : </b></td><td></td><td align="right"><b>{{ $netto }}</b></td>
@@ -41,7 +41,7 @@
 		<td>&nbsp;&nbsp; - Beban Pemakaian Perlengkapan</td><td align="right">{{ $pemakaian }}</td><td></td>
 	</tr>
 	<tr>
-		<td>&nbsp;&nbsp; Total Beban Operasi</td><td></td><td align="right">( {{ $operasi }} )</td>
+		<td>&nbsp;&nbsp; Total Beban Operasi</td><td></td><td align="right">{{ $operasi }}</td>
 	</tr>
 	<tr>
 		<td><b># Sisa Hasil Usaha : </b></td><td></td><td align="right"><b>{{ $shutotal }}</b></td>

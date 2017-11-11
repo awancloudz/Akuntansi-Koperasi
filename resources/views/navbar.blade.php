@@ -112,12 +112,12 @@
 					@else
 					<li><a href="{{ url('aruskas') }}">Arus Kas</a></li>
 					@endif
-					@if (!empty($halaman) && $halaman == 'labarugi')
+					<!--@if (!empty($halaman) && $halaman == 'labarugi')
 					<li class="active"><a href="{{ url('labarugi') }}">Laba / Rugi</a>
 					<span class="sr-only">(current)</span></li>
 					@else
 					<li><a href="{{ url('labarugi') }}">Laba / Rugi</a></li>
-					@endif
+					@endif-->
 					@if (!empty($halaman) && $halaman == 'neraca')
 					<li class="active"><a href="{{ url('neraca') }}">Neraca</a>
 					<span class="sr-only">(current)</span></li>
