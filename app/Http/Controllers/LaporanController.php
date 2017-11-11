@@ -301,7 +301,7 @@ class LaporanController extends Controller
                     $hutangbunga = $hutangbunga + $neraca->nominal;
                 }
                 //Hutang Bank
-                if($neraca->akun->id_header == 7){
+                if($neraca->akun->id_header == 9){
                     $hutangbank = $hutangbank + $neraca->nominal;
                 }
                 //Simpanan Pokok
@@ -309,7 +309,7 @@ class LaporanController extends Controller
                     $simpananpokok = $simpananpokok + $neraca->nominal;
                 }
                 //Simpanan Wajib
-                if($neraca->akun->id_header == 10){
+                if($neraca->akun->id_header == 11){
                     $simpananwajib = $simpananwajib + $neraca->nominal;
                 }
             }
@@ -427,7 +427,7 @@ class LaporanController extends Controller
                         $hutangbunga = $hutangbunga + $neraca->nominal;
                     }
                     //Hutang Bank
-                    if($neraca->akun->id_header == 7){
+                    if($neraca->akun->id_header == 9){
                         $hutangbank = $hutangbank + $neraca->nominal;
                     }
                     //Simpanan Pokok
@@ -435,7 +435,7 @@ class LaporanController extends Controller
                         $simpananpokok = $simpananpokok + $neraca->nominal;
                     }
                     //Simpanan Wajib
-                    if($neraca->akun->id_header == 10){
+                    if($neraca->akun->id_header == 11){
                         $simpananwajib = $simpananwajib + $neraca->nominal;
                     }
                 }

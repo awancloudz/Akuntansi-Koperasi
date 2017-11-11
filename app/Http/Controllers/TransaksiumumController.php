@@ -144,11 +144,40 @@ class TransaksiumumController extends Controller
     {
         $input = $request->all();
         $transaksiumum->update($input);
+        $status = $request->input('status');
+        if($status == 'debit'){
+            $status_simpan = 'kredit';
+            $status_kas = 'debit';
+        }
+        else{
+            $status_simpan = 'debit';
+            $status_kas = 'kredit';
+        }
         //Transaksi Semua
         $kodetrans = $request->input('kodetransaksi');
         $transaksisemua = New TransaksiSemua;
         $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodetrans)->firstOrFail();
-        $transaksisemua->update($input);
+        $transaksisemua->kodetransaksi = $request->kodetransaksi;
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal;
+        $transaksisemua->keterangan = $request->keterangan;
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = $status_simpan;
+        $transaksisemua->update();
+
+        //Transaksi Input Data Kas
+        $kodekas = $request->input('kodetransaksi')."-KAS";
+        $transaksisemua = New TransaksiSemua;
+        $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodekas)->firstOrFail(); 
+        $transaksisemua->kodetransaksi = $request->kodetransaksi."-KAS";
+        $transaksisemua->id_akun = $request->id_akun;
+        $transaksisemua->tanggal = $request->tanggal;
+        $transaksisemua->nominal = $request->nominal;
+        $transaksisemua->keterangan = "Kas";
+        $transaksisemua->id_users = $request->id_users;
+        $transaksisemua->status = $status_kas;
+        $transaksisemua->update();
         //End Transaksi Semua
         Session::flash('flash_message', 'Data Transaksi berhasil diupdate');
         return redirect('transaksiumum');

@@ -142,7 +142,7 @@ class TransaksisimpananController extends Controller
         $transaksisimpanan->update($input);
         
         //Transaksi update kas
-        $kodekas = $kodetrans."-KAS";
+        $kodekas = $request->input('kodetransaksi')."-KAS";
         $transaksisemua = New TransaksiSemua;
         $transaksisemua = TransaksiSemua::where('kodetransaksi', $kodekas)->firstOrFail();
         $transaksisemua->kodetransaksi = $request->kodetransaksi."-KAS";
