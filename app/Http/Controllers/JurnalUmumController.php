@@ -96,12 +96,17 @@ class JurnalUmumController extends Controller
     }
     //pencarian
     public function cari(Request $request){
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+
         $tgl_awal = $request->tgl_awal;    //Ambil value dari inputan pencarian
         $tgl_akhir = $request->tgl_akhir;
         if(!empty($tgl_awal)){                        //Jika kata kunci tidak kosong, maka... 
             //Query
             //$daftarjurnal = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir]);
-            $daftarjurnal = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            $daftar = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            $daftarjurnal = $daftar->where('id_users',$iduser);
             return view('jurnalumum.index', compact('daftarjurnal'));
         }
         return redirect('jurnalumum');
