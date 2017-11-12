@@ -24,7 +24,11 @@ class JurnalUmumController extends Controller
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiSemua::all();
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiSemua::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
         $daftarjurnal = $daftar->where('id_users',$iduser);
         return view('jurnalumum.index', compact('daftarjurnal'));
     }

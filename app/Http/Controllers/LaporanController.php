@@ -17,12 +17,15 @@ use Auth;
 use DB;
 class LaporanController extends Controller
 {
-    public function simpanan()
-    {
+    public function simpanan(){
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiSimpanan::all();
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiSimpanan::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
         $daftarsimpanan = $daftar->where('id_users',$iduser);
         return view('laporan.simpanan', compact('daftarsimpanan'));
     }
@@ -42,13 +45,15 @@ class LaporanController extends Controller
         }
         return redirect('laporan.simpanan');
     }
-
-    public function pinjaman()
-    {
+    public function pinjaman(){
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiPinjaman::all();
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiPinjaman::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
         $daftarpinjaman = $daftar->where('id_users',$iduser);
         return view('laporan.pinjaman', compact('daftarpinjaman'));
     }
@@ -68,12 +73,15 @@ class LaporanController extends Controller
         }
         return redirect('laporan.pinjaman');
     }
-    public function umum()
-    {
+    public function umum(){
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiUmum::all();
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiUmum::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
         $daftarumum = $daftar->where('id_users',$iduser);
         return view('laporan.umum', compact('daftarumum'));
     }
@@ -93,12 +101,15 @@ class LaporanController extends Controller
         }
         return redirect('laporan.umum');
     }
-    public function shu()
-    {
+    public function shu(){
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiSemua::all();
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiSemua::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
         $daftarshu_ = $daftar->where('id_users',$iduser);
         //Variabel
         $pinjaman = 0;
@@ -134,8 +145,8 @@ class LaporanController extends Controller
                 if($shu->akun->id_header == 5){
                     $penyusutan = $penyusutan + $shu->nominal;
                 }
-                //Penyusutan
-                if($shu->akun->id_header == 3){
+                //Pemakaian
+                if($shu->akun->id_header == 16){
                     $pemakaian = $pemakaian + $shu->nominal;
                 }
             }
@@ -147,7 +158,6 @@ class LaporanController extends Controller
         
         return view('laporan.shu', compact('daftarshu_','pinjaman','provisi','beban','gaji','penyusutan','pemakaian','bruto','netto','operasi','shutotal'));
     }
-
     //pencarian
     public function carishu(Request $request){
         if(Auth::check()){
@@ -195,7 +205,7 @@ class LaporanController extends Controller
                         $penyusutan = $penyusutan + $shu->nominal;
                     }
                     //Pemakaian
-                    if($shu->akun->id_header == 3){
+                    if($shu->akun->id_header == 16){
                         $pemakaian = $pemakaian + $shu->nominal;
                     }
                 }
@@ -208,13 +218,15 @@ class LaporanController extends Controller
         }
         return redirect('laporan.shu');
     }
-
-    public function neraca()
-    {
+    public function neraca(){
         if(Auth::check()){
         $iduser = Auth::user()->id;
         }
-        $daftar = TransaksiSemua::all();
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiSemua::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
         $daftarneraca = $daftar->where('id_users',$iduser);
 
         //Variabel SHU
@@ -272,7 +284,7 @@ class LaporanController extends Controller
                     $penyusutan = $penyusutan + $neraca->nominal;
                 }
                 //Pemakaian
-                if($neraca->akun->id_header == 3){
+                if($neraca->akun->id_header == 16){
                     $pemakaian = $pemakaian + $neraca->nominal;
                 }
             //NERACA
@@ -329,7 +341,6 @@ class LaporanController extends Controller
         $totalpasiva = $hutanglancar + $hutangjangkapanjang + $ekuitas;
         return view('laporan.neraca', compact('daftarneraca','aktivalancar','aktivatetap','totalaktiva','hutanglancar','hutangjangkapanjang','ekuitas','totalpasiva','kas','piutang','pemakaian','penyusutan','peralatan','hutangusaha','simpanansukarela','hutangbunga','hutangbank','simpananpokok','simpananwajib','shutotal'));
     }
-
     //pencarian
     public function carineraca(Request $request){
         if(Auth::check()){
@@ -398,7 +409,7 @@ class LaporanController extends Controller
                         $penyusutan = $penyusutan + $neraca->nominal;
                     }
                     //Pemakaian
-                    if($neraca->akun->id_header == 3){
+                    if($neraca->akun->id_header == 16){
                         $pemakaian = $pemakaian + $neraca->nominal;
                     }
                 //NERACA
@@ -457,5 +468,132 @@ class LaporanController extends Controller
             return view('laporan.neraca', compact('daftarneraca','aktivalancar','aktivatetap','totalaktiva','hutanglancar','hutangjangkapanjang','ekuitas','totalpasiva','kas','piutang','pemakaian','penyusutan','peralatan','hutangusaha','simpanansukarela','hutangbunga','hutangbank','simpananpokok','simpananwajib','shutotal'));            
         }
         return redirect('laporan.neraca');
+    }
+    public function aruskas(){
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+        
+        //$awalbulanlalu = date("Y-m-1",  strtotime('-1 month', strtotime($hariini)));
+        //$akhirbulanlalu = date("Y-m-t", strtotime('-1 month', strtotime($hariini)));
+
+        //Tanggal
+        $hariini = date("Y-m-d");
+        $awalbulanini = date("Y-m-1", strtotime($hariini));
+        $akhirbulanini = date("Y-m-t", strtotime($hariini));
+        $daftar = TransaksiSemua::whereBetween('tanggal', [$awalbulanini, $akhirbulanini])->get();
+        $daftararuskas = $daftar->where('id_users',$iduser);
+
+        //$daftar_lalu = TransaksiSemua::whereBetween('tanggal', [$awalbulanlalu, $akhirbulanlalu])->get();
+        //$daftararuskas_lalu = $daftar_lalu->where('id_users',$iduser);
+
+        //Variabel SHU
+        $pinjaman = 0;
+        $provisi = 0;
+        $beban = 0;
+        $gaji = 0;
+        $penyusutan = 0;
+        $pemakaian = 0;
+        $bruto = 0;
+        $netto = 0;
+        $operasi = 0;
+        $shutotal = 0;
+        //Variabel Arus Kas
+        $piutang = 0;
+        $satu = 0;
+        $dua = 0;
+        $tiga = 0;
+        $jumlahpendek = 0;
+        $hutangpendek = 0;
+        $pemakaian = 0;
+        $perlengkapan = 0;
+        $peralatan = 0;
+        $hutangbank = 0;
+        $simpananpokok = 0;
+        $simpananwajib = 0;
+        $totaloperasi = 0;
+        $totalinvestasi = 0;
+        $totalpembiayaan = 0;
+        $kasawal = 0;
+        $kasakhir = 0;
+
+        foreach($daftararuskas as $aruskas){
+            if($aruskas->keterangan == 'Kas'){
+            //SHU
+                //Pinjaman
+                if($aruskas->akun->id_header == 12){
+                    $pinjaman = $pinjaman + $aruskas->nominal;
+                }
+                //Provisi
+                if($aruskas->akun->id_header == 13){
+                    $provisi = $provisi + $aruskas->nominal;
+                }
+                //Beban
+                if($aruskas->akun->id_header == 14){
+                    $beban = $beban + $aruskas->nominal;
+                }
+                //Gaji
+                if($aruskas->akun->id_header == 15){
+                    $gaji = $gaji + $aruskas->nominal;
+                }
+                //Penyusutan
+                if($aruskas->akun->id_header == 5){
+                    $penyusutan = $penyusutan + $aruskas->nominal;
+                }
+                //Pemakaian
+                if($aruskas->akun->id_header == 16){
+                    $pemakaian = $pemakaian + $aruskas->nominal;
+                }
+            //ARUS KAS
+                //Piutang
+                if($aruskas->akun->id_header == 2){
+                    $piutang = $piutang + $aruskas->nominal;
+                }
+                //hutang jangka pendek
+                if($aruskas->akun->id_header == 6){
+                    $satu = $satu + $aruskas->nominal;
+                }
+                if($aruskas->akun->id_header == 7){
+                    $dua = $dua + $aruskas->nominal;
+                }
+                if($aruskas->akun->id_header == 8){
+                    $tiga = $tiga + $aruskas->nominal;
+                }
+                $jumlahpendek = $satu + $dua + $tiga;
+                $hutangpendek = $hutangpendek + $jumlahpendek;
+                //Perlengkapan
+                if($aruskas->akun->id_header == 3){
+                    $perlengkapan = $perlengkapan + $aruskas->nominal;
+                }
+                //Peralatan
+                if($aruskas->akun->id_header == 4){
+                    $peralatan = $peralatan + $aruskas->nominal;
+                }
+                //Hutang Bank
+                if($aruskas->akun->id_header == 9){
+                    $hutangbank = $hutangbank + $aruskas->nominal;
+                }
+                //Simpanan Pokok
+                if($aruskas->akun->id_header == 10){
+                    $simpananpokok = $simpananpokok + $aruskas->nominal;
+                }
+                //Simpanan Wajib
+                if($aruskas->akun->id_header == 11){
+                    $simpananwajib = $simpananwajib + $aruskas->nominal;
+                }
+            }
+        }
+        //Total SHU
+        $bruto = $pinjaman + $provisi;
+        $netto = $bruto - $beban;
+        $operasi = $gaji + $penyusutan + $pemakaian;
+        $shutotal = $netto - $operasi;
+        //Total Aruskas
+        $totaloperasi = $shutotal - ($piutang + $hutangpendek + $pemakaian + $penyusutan);
+        $totalinvestasi = $perlengkapan + $peralatan;
+        $totalpembiayaan = $hutangbank + $simpananpokok + $simpananwajib;
+        $kasakhir = $totaloperasi + $totalinvestasi + $totalpembiayaan;
+
+        return view('laporan.aruskas', compact('daftararuskas','piutang','hutangpendek','pemakaian','penyusutan','totaloperasi','perlengkapan','peralatan','totalinvestasi','hutangbank','simpananpokok','simpananwajib','totalpembiayaan','kasakhir','shutotal'));        
     }
 }

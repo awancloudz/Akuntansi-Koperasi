@@ -61,6 +61,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('lapumum','LaporanController@umum');
     Route::get('shu/cari','LaporanController@carishu');
     Route::get('shu','LaporanController@shu');
+    Route::get('aruskas/cari','LaporanController@cariaruskas');
     Route::get('aruskas','LaporanController@aruskas');
     Route::get('neraca/cari','LaporanController@carineraca');
     Route::get('neraca','LaporanController@neraca');
