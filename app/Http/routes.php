@@ -20,6 +20,7 @@ Route::group(['middleware' => ['web']], function(){
 
     //DATA MASTER
     Route::resource('header','HeaderController');
+    Route::get('akun/cari','AkunController@cari');
     Route::resource('akun','AkunController');
     Route::post('importExcel', 'AkunController@importExcel');
     Route::resource('keanggotaan','KeanggotaanController');

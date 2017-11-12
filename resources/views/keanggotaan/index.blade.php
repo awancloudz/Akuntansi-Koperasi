@@ -5,7 +5,6 @@
 	<div class="panel-heading"><b><h4>Data Keanggotaan</h4></b></div>
 	<div class="panel-body">
 	@include('_partial.flash_message')
-	@include('keanggotaan.form_pencarian')
 	<div class="tombol-nav">
 		{{ link_to('keanggotaan/create','Tambah Keanggotaan',['class' => 'btn btn-primary']) }}
 	</div><br><br><br>

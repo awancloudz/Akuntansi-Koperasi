@@ -128,4 +128,21 @@ class AkunController extends Controller
         }
         return back();
     }
+
+    //pencarian
+    public function cari(Request $request){
+        $kata_kunci = $request->input('kata_kunci');    //Ambil value dari inputan pencarian
+        if(!empty($kata_kunci)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $query = Akun::where('kode_akun', 'LIKE', '%' . $kata_kunci . '%');
+
+            $daftarakun = $query->paginate(10);
+
+            //Url Pagination
+            $pagination = $daftarakun->appends($request->except('page'));
+            $jumlahakun = $daftarakun->total();
+            return view('akun.index', compact('daftarakun','kata_kunci','pagination','jumlahakun'));
+        }
+        return redirect('akun');
+    }
 }
