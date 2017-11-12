@@ -596,4 +596,127 @@ class LaporanController extends Controller
 
         return view('laporan.aruskas', compact('daftararuskas','piutang','hutangpendek','pemakaian','penyusutan','totaloperasi','perlengkapan','peralatan','totalinvestasi','hutangbank','simpananpokok','simpananwajib','totalpembiayaan','kasakhir','shutotal'));        
     }
+    public function cariaruskas(Request $request){
+        if(Auth::check()){
+        $iduser = Auth::user()->id;
+        }
+
+        $tgl_awal = $request->tgl_awal;    //Ambil value dari inputan pencarian
+        $tgl_akhir = $request->tgl_akhir;
+        if(!empty($tgl_awal)){                        //Jika kata kunci tidak kosong, maka... 
+            //Query
+            $daftar = TransaksiSemua::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])->get();
+            $daftararuskas = $daftar->where('id_users',$iduser);
+
+            //Variabel SHU
+            $pinjaman = 0;
+            $provisi = 0;
+            $beban = 0;
+            $gaji = 0;
+            $penyusutan = 0;
+            $pemakaian = 0;
+            $bruto = 0;
+            $netto = 0;
+            $operasi = 0;
+            $shutotal = 0;
+            //Variabel Arus Kas
+            $piutang = 0;
+            $satu = 0;
+            $dua = 0;
+            $tiga = 0;
+            $jumlahpendek = 0;
+            $hutangpendek = 0;
+            $pemakaian = 0;
+            $perlengkapan = 0;
+            $peralatan = 0;
+            $hutangbank = 0;
+            $simpananpokok = 0;
+            $simpananwajib = 0;
+            $totaloperasi = 0;
+            $totalinvestasi = 0;
+            $totalpembiayaan = 0;
+            $kasawal = 0;
+            $kasakhir = 0;
+
+            foreach($daftararuskas as $aruskas){
+                if($aruskas->keterangan == 'Kas'){
+                //SHU
+                    //Pinjaman
+                    if($aruskas->akun->id_header == 12){
+                        $pinjaman = $pinjaman + $aruskas->nominal;
+                    }
+                    //Provisi
+                    if($aruskas->akun->id_header == 13){
+                        $provisi = $provisi + $aruskas->nominal;
+                    }
+                    //Beban
+                    if($aruskas->akun->id_header == 14){
+                        $beban = $beban + $aruskas->nominal;
+                    }
+                    //Gaji
+                    if($aruskas->akun->id_header == 15){
+                        $gaji = $gaji + $aruskas->nominal;
+                    }
+                    //Penyusutan
+                    if($aruskas->akun->id_header == 5){
+                        $penyusutan = $penyusutan + $aruskas->nominal;
+                    }
+                    //Pemakaian
+                    if($aruskas->akun->id_header == 16){
+                        $pemakaian = $pemakaian + $aruskas->nominal;
+                    }
+                //ARUS KAS
+                    //Piutang
+                    if($aruskas->akun->id_header == 2){
+                        $piutang = $piutang + $aruskas->nominal;
+                    }
+                    //hutang jangka pendek
+                    if($aruskas->akun->id_header == 6){
+                        $satu = $satu + $aruskas->nominal;
+                    }
+                    if($aruskas->akun->id_header == 7){
+                        $dua = $dua + $aruskas->nominal;
+                    }
+                    if($aruskas->akun->id_header == 8){
+                        $tiga = $tiga + $aruskas->nominal;
+                    }
+                    $jumlahpendek = $satu + $dua + $tiga;
+                    $hutangpendek = $hutangpendek + $jumlahpendek;
+                    //Perlengkapan
+                    if($aruskas->akun->id_header == 3){
+                        $perlengkapan = $perlengkapan + $aruskas->nominal;
+                    }
+                    //Peralatan
+                    if($aruskas->akun->id_header == 4){
+                        $peralatan = $peralatan + $aruskas->nominal;
+                    }
+                    //Hutang Bank
+                    if($aruskas->akun->id_header == 9){
+                        $hutangbank = $hutangbank + $aruskas->nominal;
+                    }
+                    //Simpanan Pokok
+                    if($aruskas->akun->id_header == 10){
+                        $simpananpokok = $simpananpokok + $aruskas->nominal;
+                    }
+                    //Simpanan Wajib
+                    if($aruskas->akun->id_header == 11){
+                        $simpananwajib = $simpananwajib + $aruskas->nominal;
+                    }
+                }
+            }
+            //Total SHU
+            $bruto = $pinjaman + $provisi;
+            $netto = $bruto - $beban;
+            $operasi = $gaji + $penyusutan + $pemakaian;
+            $shutotal = $netto - $operasi;
+            //Total Aruskas
+            $totaloperasi = $shutotal - ($piutang + $hutangpendek + $pemakaian + $penyusutan);
+            $totalinvestasi = $perlengkapan + $peralatan;
+            $totalpembiayaan = $hutangbank + $simpananpokok + $simpananwajib;
+            $kasakhir = $totaloperasi + $totalinvestasi + $totalpembiayaan;
+
+            return view('laporan.aruskas', compact('daftararuskas','piutang','hutangpendek','pemakaian','penyusutan','totaloperasi','perlengkapan','peralatan','totalinvestasi','hutangbank','simpananpokok','simpananwajib','totalpembiayaan','kasakhir','shutotal'));        
+        }
+        return redirect('laporan.aruskas');
+    }
 }
