@@ -18,11 +18,11 @@
 	</div>
 	<div class="col-md-6">
 		<div class="box-button">
-		{{ link_to('aruskas/cetak','Cetak SHU',['class' => 'btn btn-primary','target'=>'_blank']) }}
+		{{ link_to('aruskas/cetak','Cetak Arus Kas',['class' => 'btn btn-primary','target'=>'_blank']) }}
 		</div>
-		<div class="box-button">
+		<!--<div class="box-button">
 		{{ link_to('aruskas/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
-		</div>
+		</div>-->
 	</div>
 </div>
 	{!! Form::close() !!}

@@ -53,19 +53,40 @@ Route::group(['middleware' => ['web']], function(){
     
     //LAPORAN
     Route::get('jurnalumum/cari','JurnalUmumController@cari');
-    Route::resource('jurnalumum','JurnalUmumController');
+    Route::get('jurnalumum','JurnalUmumController@index');
+    Route::get('jurnalumum/cetak',[
+    'uses' => 'JurnalUmumController@getPdf',
+    'as' => 'jurnalumum.cetak',]);
     Route::get('lapsimpanan/cari','LaporanController@carisimpanan');
     Route::get('lapsimpanan','LaporanController@simpanan');
+    Route::get('lapsimpanan/cetak',[
+    'uses' => 'LaporanController@getPdf_simpanan',
+    'as' => 'laporan.cetaksimpanan',]);
     Route::get('lappinjaman/cari','LaporanController@caripinjaman');
     Route::get('lappinjaman','LaporanController@pinjaman');
+    Route::get('lappinjaman/cetak',[
+    'uses' => 'LaporanController@getPdf_pinjaman',
+    'as' => 'laporan.cetakpinjaman',]);
     Route::get('lapumum/cari','LaporanController@cariumum');
     Route::get('lapumum','LaporanController@umum');
+    Route::get('lapumum/cetak',[
+    'uses' => 'LaporanController@getPdf_umum',
+    'as' => 'laporan.cetakumum',]);
     Route::get('shu/cari','LaporanController@carishu');
     Route::get('shu','LaporanController@shu');
+    Route::get('shu/cetak',[
+    'uses' => 'LaporanController@getPdf_shu',
+    'as' => 'laporan.cetakshu',]);
     Route::get('aruskas/cari','LaporanController@cariaruskas');
     Route::get('aruskas','LaporanController@aruskas');
+    Route::get('aruskas/cetak',[
+    'uses' => 'LaporanController@getPdf_aruskas',
+    'as' => 'laporan.cetakaruskas',]);
     Route::get('neraca/cari','LaporanController@carineraca');
     Route::get('neraca','LaporanController@neraca');
+    Route::get('neraca/cetak',[
+    'uses' => 'LaporanController@getPdf_neraca',
+    'as' => 'laporan.cetakaneraca',]);
 });
 
 

@@ -18,7 +18,7 @@
 	</div>
 	<div class="col-md-6">
 		<div class="box-button">
-		{{ link_to('jurnalumum/cetak','Cetak Jurnal Umum',['class' => 'btn btn-primary','target'=>'_blank']) }}
+		{{ link_to('jurnalumum/cetak' ,'Cetak Jurnal Umum',['class' => 'btn btn-primary','target'=>'_blank']) }}
 		</div>
 		<div class="box-button">
 		{{ link_to('jurnalumum/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}

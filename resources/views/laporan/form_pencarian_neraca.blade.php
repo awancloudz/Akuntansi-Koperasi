@@ -18,11 +18,11 @@
 	</div>
 	<div class="col-md-6">
 		<div class="box-button">
-		{{ link_to('shu/neraca','Cetak SHU',['class' => 'btn btn-primary','target'=>'_blank']) }}
+		{{ link_to('neraca/cetak','Cetak Neraca',['class' => 'btn btn-primary','target'=>'_blank']) }}
 		</div>
-		<div class="box-button">
-		{{ link_to('shu/neraca','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
-		</div>
+		<!--<div class="box-button">
+		{{ link_to('neraca/export','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
+		</div>-->
 	</div>
 </div>
 	{!! Form::close() !!}

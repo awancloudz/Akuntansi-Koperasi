@@ -20,9 +20,9 @@
 		<div class="box-button">
 		{{ link_to('lapsimpanan/cetak','Cetak Simpanan',['class' => 'btn btn-primary','target'=>'_blank']) }}
 		</div>
-		<div class="box-button">
+		<!--<div class="box-button">
 		{{ link_to('lapsimpanan/ekspor','Export ke Excel',['class' => 'btn btn-success','target'=>'_blank']) }}
-		</div>
+		</div>-->
 	</div>
 </div>
 	{!! Form::close() !!}
