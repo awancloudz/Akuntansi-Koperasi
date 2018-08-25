@@ -43,4 +43,7 @@ class User extends Authenticatable
     public function transaksiutama(){
         return $this->hasMany('App\TransaksiUtama', 'id_users');
     }
+    public function nilaikuesioner(){
+        return $this->hasMany('App\NilaiKuesioner', 'id_users');
+    }
 }

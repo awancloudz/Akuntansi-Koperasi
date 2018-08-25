@@ -6,7 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Grup;
 use App\Header;
 use App\Akun;
-
+use App\AspekGrup;
+use App\Kuesioner;
 class FormAkunServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +22,9 @@ class FormAkunServiceProvider extends ServiceProvider
         });
         view()->composer('akun.form', function($view){
             $view->with('list_header', Header::lists('nama_header', 'id'));
+        });
+        view()->composer('kuesioner.form', function($view){
+            $view->with('list_aspek', AspekGrup::lists('nama_aspekgrup', 'id'));
         });
     }
 

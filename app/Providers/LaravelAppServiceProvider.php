@@ -28,6 +28,12 @@ class LaravelAppServiceProvider extends ServiceProvider
         if(Request::segment(1) == 'keanggotaan'){
             $halaman = 'keanggotaan';
         }
+        if(Request::segment(1) == 'aspekgrup'){
+            $halaman = 'aspekgrup';
+        }
+        if(Request::segment(1) == 'kuesioner'){
+            $halaman = 'kuesioner';
+        }
         //TRANSAKSI
         if(Request::segment(1) == 'transaksisimpanan'){
             $halaman = 'transaksisimpanan';
@@ -70,7 +76,9 @@ class LaravelAppServiceProvider extends ServiceProvider
         if(Request::segment(1) == 'neraca'){
             $halaman = 'neraca';
         }
-
+        if(Request::segment(1) == 'nilaikuesioner'){
+            $halaman = 'nilaikuesioner';
+        }
         view()->share('halaman', $halaman);
     }
 

@@ -24,7 +24,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('akun','AkunController');
     Route::post('importExcel', 'AkunController@importExcel');
     Route::resource('keanggotaan','KeanggotaanController');
-
+    Route::resource('aspekgrup','AspekController');
+    Route::resource('kuesioner','KuesionerController');
     //NASABAH
     Route::get('nasabah/cari','NasabahController@cari');
     Route::resource('nasabah','NasabahController');
@@ -87,6 +88,7 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('neraca/cetak',[
     'uses' => 'LaporanController@getPdf_neraca',
     'as' => 'laporan.cetakaneraca',]);
+    Route::resource('nilaikuesioner','NilaiKuesionerController');
 });
 
 
