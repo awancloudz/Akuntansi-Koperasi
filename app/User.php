@@ -46,4 +46,7 @@ class User extends Authenticatable
     public function nilaikuesioner(){
         return $this->hasMany('App\NilaiKuesioner', 'id_users');
     }
+    public function detailpenilaian(){
+        return $this->hasMany('App\DetailPenilaian', 'id_users');
+    }
 }
