@@ -18,13 +18,7 @@
 			<li class="dropdown">
 		 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data Master<span class="caret"></span></a>
 		 		<ul class="dropdown-menu" role="menu">
-          @if (!empty($halaman) && $halaman == 'koperasi')
-					<li class="active"><a href="{{ url('koperasi') }}">Data Koperasi</a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('koperasi') }}">Data Koperasi</a></li>
-					@endif
-          @if (!empty($halaman) && $halaman == 'header')
+          			@if (!empty($halaman) && $halaman == 'header')
 					<li class="active"><a href="{{ url('header') }}">Grup Kategori</a>
 					<span class="sr-only">(current)</span></li>
 					@else
@@ -93,6 +87,12 @@
 					<span class="sr-only">(current)</span></li>
 					@else
 					<li><a href="{{ url('nilaikuesioner') }}">Penilaian Aspek Manajemen</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'kesehatankoperasi')
+					<li class="active"><a href="{{ url('kesehatankoperasi') }}">Penilaian Kesehatan Koperasi</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('kesehatankoperasi') }}">Penilaian Kesehatan Koperasi</a></li>
 					@endif
                     @if (!empty($halaman) && $halaman == 'jurnalumum')
 					<li class="active"><a href="{{ url('jurnalumum') }}">Jurnal Umum</a>

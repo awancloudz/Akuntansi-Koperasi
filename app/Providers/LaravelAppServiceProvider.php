@@ -16,9 +16,6 @@ class LaravelAppServiceProvider extends ServiceProvider
     {
         //MASTER
         $halaman = '';
-        if(Request::segment(1) == 'koperasi'){
-            $halaman = 'koperasi';
-        }
         if(Request::segment(1) == 'header'){
             $halaman = 'header';
         }
@@ -81,6 +78,9 @@ class LaravelAppServiceProvider extends ServiceProvider
         }
         if(Request::segment(1) == 'nilaikuesioner'){
             $halaman = 'nilaikuesioner';
+        }
+        if(Request::segment(1) == 'kesehatankoperasi'){
+            $halaman = 'kesehatankoperasi';
         }
         view()->share('halaman', $halaman);
     }

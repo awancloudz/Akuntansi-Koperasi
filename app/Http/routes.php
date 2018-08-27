@@ -89,6 +89,7 @@ Route::group(['middleware' => ['web']], function(){
     'uses' => 'LaporanController@getPdf_neraca',
     'as' => 'laporan.cetakaneraca',]);
     Route::resource('nilaikuesioner','NilaiKuesionerController');
+    Route::resource('kesehatankoperasi','KesehatanKoperasiController');
 });
 
 
