@@ -24,23 +24,24 @@ class NilaiKuesionerController extends Controller
         $daftarkuesioner = NilaiKuesioner::where('id_users',$iduser)->get();
         $jumlahkuesioner = $daftarkuesioner->count();
         if($jumlahkuesioner > 0){
-            //$daftarnilai = NilaiKuesioner::distinct()->addSelect('id_aspekgrup')->where('id_users',$iduser)->get();
             $daftaraspek = Kuesioner::orderBy('id_aspekgrup', 'asc')->get();
             $daftarnilai = NilaiKuesioner::where('id_users',$iduser)->get();
+            $daftargrup = NilaiKuesioner::distinct()->addSelect('id_aspekgrup')->where('id_users',$iduser)->get();
         }
         else{
             $daftaraspek = Kuesioner::orderBy('id_aspekgrup', 'asc')->get();
             foreach($daftaraspek as $aspek){
                 $simpanaspek = New NilaiKuesioner;
                 $simpanaspek->id_users = $iduser;
+                $simpanaspek->id_aspekgrup = $aspek->aspekgrup->id;
                 $simpanaspek->id_kuesioner = $aspek->id;
                 $simpanaspek->pilihan = "tidak";
                 $simpanaspek->save();
             }
             $daftarnilai = NilaiKuesioner::where('id_users',$iduser)->get();
-            //$daftarnilai = NilaiKuesioner::distinct()->addSelect('id_aspekgrup')->where('id_users',$iduser)->get();
+            $daftargrup = NilaiKuesioner::distinct()->addSelect('id_aspekgrup')->where('id_users',$iduser)->get();
         }
-        return view('nilaikuesioner.index', compact('daftaraspek','daftarnilai'));
+        return view('nilaikuesioner.index', compact('daftaraspek','daftarnilai','daftargrup'));
     }
 
     /**

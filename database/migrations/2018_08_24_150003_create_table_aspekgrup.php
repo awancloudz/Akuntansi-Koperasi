@@ -24,6 +24,13 @@ class CreateTableAspekgrup extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
+        Schema::table('nilaikuesioner', function(Blueprint $table) {
+            $table->foreign('id_aspekgrup')
+                ->references('id')
+                ->on('aspekgrup')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
     }
 
     /**
@@ -35,6 +42,9 @@ class CreateTableAspekgrup extends Migration
     {
         Schema::table('kuesioner', function(Blueprint $table) {
             $table->dropForeign('kuesioner_id_aspekgrup_foreign');
+        });
+        Schema::table('nilaikuesioner', function(Blueprint $table) {
+            $table->dropForeign('nilaikuesioner_id_aspekgrup_foreign');
         });
         Schema::drop('aspekgrup');
     }

@@ -15,6 +15,7 @@ class CreateTableNilaikuesioner extends Migration
         Schema::create('nilaikuesioner', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_users')->unsigned();
+            $table->integer('id_aspekgrup')->unsigned();
             $table->integer('id_kuesioner')->unsigned();
             $table->enum('pilihan',['ya','tidak']);
             $table->timestamps();

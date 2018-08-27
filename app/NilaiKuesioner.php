@@ -10,13 +10,17 @@ class NilaiKuesioner extends Model
 
     //Hanya jika semua data disimpan tanpa seleksi
     protected $fillable = [
-    	'id_users',
+        'id_users',
+        'id_aspekgrup',
     	'id_kuesioner',
         'pilihan',
     	'created_at',
         'updated_at'
     ];
     //One to Many DARI <-
+    public function aspekgrup(){
+        return $this->belongsTo('App\AspekGrup', 'id_aspekgrup');
+    }
     public function kuesioner(){
         return $this->belongsTo('App\Kuesioner', 'id_kuesioner');
     }

@@ -19,4 +19,7 @@ class AspekGrup extends Model
     public function kuesioner(){
         return $this->hasMany('App\Kuesioner', 'id_aspekgrup');
     }
+    public function nilaikuesioner(){
+        return $this->hasMany('App\NilaiKuesioner', 'id_aspekgrup');
+    }
 }

@@ -17,7 +17,7 @@ class KuesionerController extends Controller
      */
     public function index()
     {
-        $daftarkuesioner= Kuesioner::orderBy('id_aspekgrup', 'asc')->paginate(50);
+        $daftarkuesioner= Kuesioner::orderBy('id', 'asc')->paginate(50);
         $jumlahkuesioner= Kuesioner::count();
         return view('kuesioner.index', compact('daftarkuesioner','jumlahkuesioner'));
     }
