@@ -16,6 +16,9 @@ class LaravelAppServiceProvider extends ServiceProvider
     {
         //MASTER
         $halaman = '';
+        if(Request::segment(1) == 'koperasi'){
+            $halaman = 'koperasi';
+        }
         if(Request::segment(1) == 'header'){
             $halaman = 'header';
         }
