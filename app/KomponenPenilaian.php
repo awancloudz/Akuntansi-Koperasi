@@ -13,7 +13,7 @@ class KomponenPenilaian extends Model
         'id_aspekpenilaian',
         'komponen', 
         'bobot',
-    	  'created_at',
+    	'created_at',
         'updated_at'
     ];
 

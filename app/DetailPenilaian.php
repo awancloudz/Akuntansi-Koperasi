@@ -12,11 +12,11 @@ class DetailPenilaian extends Model
     protected $fillable = [
         'id_users',
         'id_aspekpenilaian',
-    	  'id_komponenpenilaian',
+    	'id_komponenpenilaian',
         'persen',
         'nilaikredit',
         'skor',
-    	  'created_at',
+    	'created_at',
         'updated_at'
     ];
     //One to Many DARI <-

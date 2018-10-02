@@ -2,12 +2,12 @@
 
 @section('main')
 <div id="kesehatankoperasi" class="panel panel-default">
-	<div class="panel-heading"><b><h4>Laporan Penilaian Kesehatan Koperasi</h4></b></div>
+	<div class="panel-heading"><b><h4>Laporan Penilaian Kesehatan Koperasi - Koperasi {{ $user->name }}</h4></b></div>
 	<div class="panel-body">
 	@include('_partial.flash_message')
 	<!--@include('kuesioner.form_pencarian')-->
 	<div class="tombol-nav">
-		{{ link_to('kesehatankoperasi/cetak','Cetak Data Penilaian',['class' => 'btn btn-success']) }}
+		{{ link_to('penilaiankesehatan/cetak','Cetak Data Penilaian',['class' => 'btn btn-success']) }}
 	</div><br><br>
 	@if (count($daftargrup) > 0)
 	<table class="table table-striped">
@@ -58,15 +58,17 @@
 				<td align="center">{{ $nilaikesehatan->persen }}</td>	
 				<td align="center">{{ $nilaikesehatan->nilaikredit }}</td>
 				<td align="center">{{ $nilaikesehatan->komponenpenilaian->bobot }} %</td>
-				<td align="center"><font color="blue"><b>{{ $nilaikesehatan->skor }}</b></font></td>
-				<?php 
-				$nilaitotal = $nilaitotal + $nilaikesehatan->skor;
-				?>
+				<td align="center">{{ $nilaikesehatan->skor }}</td>
+				<!--<td>
+				<div class="box-button">
+					{{ link_to('kesehatankoperasi/' . $nilaikesehatan->id . '/edit', 'Edit', ['class' => 'btn btn-warning btn-sm']) }}
+				</div>
+				</td>-->
 			</tr>
 			@endif
 			@endforeach
 		@endforeach
-			<tr><td colspan="4"></td><td align="center"><b>Skor Total</td><td align="center"><font color="blue"><b>{{ $nilaitotal }}</b></font></td></tr>
+			<tr><td colspan="4"></td><td align="center"><b>Skor Total</td><td align="center">{{ $nilaitotal }}</td></tr>
 		</tbody>
 	</table>
 	@else

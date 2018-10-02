@@ -36,18 +36,6 @@
 					@else
 					<li><a href="{{ url('keanggotaan') }}">Keanggotaan</a></li>
 					@endif
-					@if (!empty($halaman) && $halaman == 'aspekgrup')
-					<li class="active"><a href="{{ url('aspekgrup') }}">Aspek Kuesioner</a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('aspekgrup') }}">Aspek Kuesioner</a></li>
-					@endif
-					@if (!empty($halaman) && $halaman == 'kuesioner')
-					<li class="active"><a href="{{ url('kuesioner') }}">Data Kuesioner</a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('kuesioner') }}">Data Kuesioner</a></li>
-					@endif
                 </ul>
 		 	</li>
 		 			@if (!empty($halaman) && $halaman == 'nasabah')
@@ -82,18 +70,6 @@
 		 	<li class="dropdown">
 		 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Laporan<span class="caret"></span></a>
 		 		<ul class="dropdown-menu" role="menu">
-				 	@if (!empty($halaman) && $halaman == 'nilaikuesioner')
-					<li class="active"><a href="{{ url('nilaikuesioner') }}">Penilaian Aspek Manajemen</a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('nilaikuesioner') }}">Penilaian Aspek Manajemen</a></li>
-					@endif
-					@if (!empty($halaman) && $halaman == 'kesehatankoperasi')
-					<li class="active"><a href="{{ url('kesehatankoperasi') }}">Penilaian Kesehatan Koperasi</a>
-					<span class="sr-only">(current)</span></li>
-					@else
-					<li><a href="{{ url('kesehatankoperasi') }}">Penilaian Kesehatan Koperasi</a></li>
-					@endif
                     @if (!empty($halaman) && $halaman == 'jurnalumum')
 					<li class="active"><a href="{{ url('jurnalumum') }}">Jurnal Umum</a>
 					<span class="sr-only">(current)</span></li>
@@ -135,6 +111,58 @@
 					<span class="sr-only">(current)</span></li>
 					@else
 					<li><a href="{{ url('neraca') }}">Neraca</a></li>
+					@endif
+                </ul>
+		 	</li>
+			<li class="dropdown">
+		 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data Master Penilaian<span class="caret"></span></a>
+		 		<ul class="dropdown-menu" role="menu">
+					@if (!empty($halaman) && $halaman == 'aspekgrup')
+					<li class="active"><a href="{{ url('aspekgrup') }}">Aspek Kuesioner</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('aspekgrup') }}">Aspek Kuesioner</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'kuesioner')
+					<li class="active"><a href="{{ url('kuesioner') }}">Komponen Kuesioner</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('kuesioner') }}">Komponen Kuesioner</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'aspekpenilaian')
+					<li class="active"><a href="{{ url('aspekpenilaian') }}">Aspek Penilaian</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('aspekpenilaian') }}">Aspek Penilaian</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'komponenpenilaian')
+					<li class="active"><a href="{{ url('komponenpenilaian') }}">Komponen Penilaian</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('komponenpenilaian') }}">Komponen Penilaian</a></li>
+					@endif
+                </ul>
+		 	</li>
+			<li class="dropdown">
+		 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Laporan Kesehatan Koperasi<span class="caret"></span></a>
+		 		<ul class="dropdown-menu" role="menu">
+				 	@if (!empty($halaman) && $halaman == 'nilaikuesioner')
+					<li class="active"><a href="{{ url('nilaikuesioner') }}">Penilaian Aspek Manajemen</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('nilaikuesioner') }}">Penilaian Aspek Manajemen</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'kesehatankoperasi')
+					<li class="active"><a href="{{ url('kesehatankoperasi') }}">Penilaian Kesehatan Koperasi</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('kesehatankoperasi') }}">Penilaian Kesehatan Koperasi</a></li>
+					@endif
+					@if (!empty($halaman) && $halaman == 'penilaiankesehatan')
+					<li class="active"><a href="{{ url('penilaiankesehatan') }}">Penilaian Kesehatan Koperasi</a>
+					<span class="sr-only">(current)</span></li>
+					@else
+					<li><a href="{{ url('penilaiankesehatan') }}">Penilaian Kesehatan Koperasi</a></li>
 					@endif
                 </ul>
 		 	</li>

@@ -26,6 +26,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::resource('keanggotaan','KeanggotaanController');
     Route::resource('aspekgrup','AspekController');
     Route::resource('kuesioner','KuesionerController');
+    Route::resource('aspekpenilaian','AspekPenilaianController');
+    Route::resource('komponenpenilaian','KomponenPenilaianController');
     //NASABAH
     Route::get('nasabah/cari','NasabahController@cari');
     Route::resource('nasabah','NasabahController');
@@ -90,6 +92,9 @@ Route::group(['middleware' => ['web']], function(){
     'as' => 'laporan.cetakaneraca',]);
     Route::resource('nilaikuesioner','NilaiKuesionerController');
     Route::resource('kesehatankoperasi','KesehatanKoperasiController');
+    //Admin
+    Route::get('penilaiankesehatan','KesehatanKoperasiController@indexadmin');
+    Route::get('penilaiankesehatan/{user}','KesehatanKoperasiController@showadmin');
 });
 
 

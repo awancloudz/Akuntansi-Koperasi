@@ -1,58 +1,35 @@
-@if (isset($akun))
-{!! Form::hidden('id', $akun->id) !!}
+@if (isset($nilaikuesioner))
+{!! Form::hidden('id', $nilaikuesioner->id) !!}
 @endif
 
-{{-- Kode Header --}}
+{{-- Deskripsi Kuesioner --}}
 <div class="form-group">
-{!! Form::label('id_header','Grup Kategori',['class' => 'control-label']) !!}
-@if(count($list_header) > 0)
-{!! Form::select('id_header', $list_header, null,['class' => 'form-control js-example-basic-single', 'id'=>'id_header','placeholder'=>'Pilih Kategori']) !!}
-@else
-<p>Tidak ada pilihan grup kategori,silahkan buat dulu.</p>
-@endif
-@if ($errors->has('id_header'))
-<span class="help-block">{{ $errors->first('id_header') }}</span>
-@endif
+{!! Form::label('id_kuesioner','Deskripsi Kuesioner',['class' => 'control-label']) !!}<br>
+<?php echo strtoupper($nilaikuesioner->kuesioner->deskripsi); ?>
 </div>
 
-{{-- Jenis Akun --}}
-<div class="form-group">
-{!! Form::label('status','Jenis Akun',['class' => 'control-label']) !!}
-<select name="status" class="form-control js-example-basic-single">
-<option value="header">Header</option>
-<option value="akun">Akun Murni</option>
-</select>
-@if ($errors->has('status'))
-<span class="help-block">{{ $errors->first('status') }}</span>
-@endif
-</div>
-
-{{-- Kode --}}
+{{-- Pilihan Kuesioner --}}
 @if($errors->any())
-<div class="form-group {{ $errors->has('kode_akun') ? 'has-error' : 'has-success' }}"></div>
+<div class="form-group {{ $errors->has('pilihan') ? 'has-error' : 'has-success' }}"></div>
 @else
 <div class="form-group">
 @endif
-{!! Form::label('kode_akun','Kode Akun',['class' => 'control-label']) !!}
-{!! Form::text('kode_akun', null,['class' => 'form-control']) !!}
-@if ($errors->has('kode_akun'))
-<span class="help-block">{{ $errors->first('kode_akun') }}</span>
+{!! Form::label('pilihan','Pilihan Kuesioner',['class' => 'control-label','id' => 'pilihan']) !!}
+<div class="radio">
+<label>
+{!! Form::radio('pilihan','ya') !!} YA
+</label>
+</div>
+<div class="radio">
+<label>{!! Form::radio('pilihan','tidak') !!} TIDAK
+</label>
+</div>
+@if ($errors->has('pilihan'))
+<span class="help-block">{{ $errors->first('pilihan') }}</span>
 @endif
 </div>
 
-{{-- Nama --}}
-@if($errors->any())
-<div class="form-group {{ $errors->has('nama_akun') ? 'has-error' : 'has-success' }}"></div>
-@else
-<div class="form-group">
-@endif
-{!! Form::label('nama_akun','Nama Akun',['class' => 'control-label']) !!}
-{!! Form::text('nama_akun', null,['class' => 'form-control']) !!}
-@if ($errors->has('nama_akun'))
-<span class="help-block">{{ $errors->first('nama_akun') }}</span>
-@endif
 </div>
-
 {{-- Submit button --}}
 <div class="form-group">
 {!! Form::submit($submitButtonText,['class' => 'btn btn-primary form-control']) !!}

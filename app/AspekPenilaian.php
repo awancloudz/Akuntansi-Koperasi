@@ -10,8 +10,8 @@ class AspekPenilaian extends Model
 
     //Hanya jika semua data disimpan tanpa seleksi
     protected $fillable = [
-    	  'nama_aspekpenilaian',
-    	  'created_at',
+    	'nama_aspekpenilaian',
+    	'created_at',
         'updated_at'
     ];
 
