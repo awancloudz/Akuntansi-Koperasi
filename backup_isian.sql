@@ -112,3 +112,36 @@ INSERT INTO `kuesioner` (`id`, `id_aspekgrup`, `deskripsi`, `created_at`, `updat
 (36, 5, 'Memiiki pedoman administrasi yang efektif untuk memantau kewajiban yang jatuh tempo (dibuktikan dengan adanya dokumen tertulis mengenai skedul penghimpunan simpanan dan pemberian pinjaman)', '2018-08-26 08:07:10', '2018-08-26 08:07:10'),
 (37, 5, 'Memiliki kebijakan penghimpunan simpanan dan pemberian pinjaman sesuai dengan kondisi keuangan KSP/USP Koperasi (dibuktikan dengan kebijakan tertulis)', '2018-08-26 08:07:50', '2018-08-26 08:07:50'),
 (38, 5, 'Memiliki sistem informasi manajemen yang memadai untuk pemantauan likuiditas (dibuktikan dengan dokumen tertulis berupa sistem pelaporan penghimpunan simpanan dan pemberian pinjaman)', '2018-08-26 08:08:44', '2018-08-26 08:08:44');
+
+INSERT INTO `aspekpenilaian` (`id`, `nama_aspekpenilaian`, `created_at`, `updated_at`) VALUES
+(1, 'PEMODALAN', NULL, '2018-09-26 14:47:23'),
+(2, 'KUALITAS AKTIVA PRODUKTIF', NULL, NULL),
+(3, 'MANAJEMEN', NULL, NULL),
+(4, 'EFISIENSI', NULL, NULL),
+(5, 'LIKUIDITAS', NULL, NULL),
+(6, 'KEMANDIRIAN DAN PERTUMBUHAN', NULL, NULL),
+(7, 'JATI DIRI KOPERASI', NULL, NULL);
+
+INSERT INTO `komponenpenilaian` (`id`, `id_aspekpenilaian`, `komponen`, `bobot`, `created_at`, `updated_at`) VALUES
+(1, 1, 'RASIO MODAL SENDIRI TERHADAP TOTAL ASSET', 6, NULL, '2018-09-26 15:06:58'),
+(2, 1, 'RASIO MODAL SENDIRI TERHADAP PEMINJAM BERESIKO', 6, NULL, NULL),
+(3, 1, 'RASIO KECUKUPAN MODAL (CAR)', 3, NULL, NULL),
+(4, 2, 'RASIO VOLUME PINJAMAN PADA ANGGOTA TERHADAP PINJAMAN YANG DIBERIKAN', 10, NULL, NULL),
+(5, 2, 'RASIO RESIKO PINJAMAN BERMASALAH TERHADAP PINJAMAN YANG DIBERIKAN', 5, NULL, NULL),
+(6, 2, 'RASIO CADANGAN RESIKO TERHADAP PINJAMAN BERMASALAH', 5, NULL, NULL),
+(7, 2, 'RASIO PINJAMAN YANG BERESIKO TERHADAP PINJAMAN YANG DIBERIKAN', 5, NULL, NULL),
+(8, 3, 'MANAJEMEN UMUM', 3, NULL, NULL),
+(9, 3, 'KELEMBAGAAN', 3, NULL, NULL),
+(10, 3, 'MANAJEMEN PERMODALAN', 3, NULL, NULL),
+(11, 3, 'MANAJEMEN AKTIVA', 3, NULL, NULL),
+(12, 3, 'MANAJEMEN LIKUIDITAS', 3, NULL, NULL),
+(13, 4, 'RASIO BIAYA OPERASIONAL PELAYANAN TERHADAP PARTISIPASI BRUTO', 4, NULL, NULL),
+(14, 4, 'RASIO BEBAN USAHA TERHADAP SHU KOTOR', 4, NULL, NULL),
+(15, 4, 'RASIO EFISIENSI STAF', 2, NULL, NULL),
+(16, 5, 'CASH RASIO', 10, NULL, NULL),
+(17, 5, 'RASIO PEMBIAYAAN TERHADAP DANA YANG DITERIMA', 5, NULL, NULL),
+(18, 6, 'RENTABILITAS ASET', 3, NULL, NULL),
+(19, 6, 'RENTABILITAS MODAL SENDIRI', 3, NULL, NULL),
+(20, 6, 'KEMANDIRIAN OPERASIONAL PELAYANAN', 4, NULL, NULL),
+(21, 7, 'RASIO PARTISIPASI BRUTO', 7, NULL, NULL),
+(22, 7, 'RASIO PARTISIPASI EKONOMI ANGGOTA (PEA)', 3, NULL, NULL);
