@@ -64,7 +64,10 @@ class KesehatanKoperasiController extends Controller
                 //Modal Tertimbang
                 $sumbangan = 0; $cadangan = 0; $cadanganres = 0; $penyertaan = 0; $simpanankhusus = 0; $penyetaraan = 0; 
                 //Total Neraca 
-                $aktivalancar = 0; $aktivatetap = 0; $totalaktiva = 0; $hutanglancar = 0; $hutangjangkapanjang = 0; $ekuitas = 0; $totalpasiva = 0; $totalmodal = 0; $persentase = 0; $nilaikredit = 0;
+                $aktivalancar = 0; $aktivatetap = 0; $totalaktiva = 0; $hutanglancar = 0; $hutangjangkapanjang = 0; $ekuitas = 0; $totalpasiva = 0; $totalmodal = 0; $totalmodal2 =0; $persentase = 0; $nilaikredit = 0;
+                //Aktiva Tertimbang
+                $pinjamanang = 0; $pinjamannon = 0; $piutanglain = 0; $penyisihanpiutang = 0; $suratberharga = 0; $premi = 0; $sewadibayar = 0; $penyertaankop =0; $penyertaannon =0; $aktivalancarlain =0; $tanah =0; $bangunan =0; $kendaran =0;
+                $perlengkapan = 0; $peralatankantor = 0; $inventarislain = 0; $penyusutanaktiva = 0; $aktivatetaplain = 0; $praoperasional = 0; $amorbiaya = 0; $rupaaktiva = 0;
                 //Hitung Neraca & Modal
                 foreach($daftarneraca as $neraca){
                     if($neraca->keterangan == 'Kas'){
@@ -155,6 +158,95 @@ class KesehatanKoperasiController extends Controller
                         if($neraca->akun->id_header == 22){
                             $penyetaraan = $penyetaraan + $neraca->nominal;
                         }
+                    //AKTIVA TERTIMBANG
+                        //Pinjaman Anggota
+                        if($neraca->id_akun == 3){
+                            $pinjamanang = $pinjamanang + $neraca->nominal;
+                        }
+                        //Pinjaman Non Anggota
+                        if($neraca->id_akun == 23){
+                            $pinjamannon = $pinjamannon + $neraca->nominal;
+                        }
+                        //Piutang Lain
+                        if($neraca->id_akun == 24){
+                            $piutanglain = $piutanglain + $neraca->nominal;
+                        }
+                        //Penyisihan Piutang
+                        if($neraca->id_akun == 25){
+                            $penyisihanpiutang = $penyisihanpiutang + $neraca->nominal;
+                        }
+                        //Surat berharga
+                        if($neraca->id_akun == 26){
+                            $suratberharga = $suratberharga + $neraca->nominal;
+                        }
+                        //Premi Asuransi
+                        if($neraca->id_akun == 27){
+                            $premi = $premi + $neraca->nominal;
+                        }
+                        //Sewa Dibayar di Muka
+                        if($neraca->id_akun == 28){
+                            $sewadibayar = $sewadibayar + $neraca->nominal;
+                        }
+                        //Penyertaan Koperasi lainnya
+                        if($neraca->id_akun == 29){
+                            $penyertaankop = $penyertaankop + $neraca->nominal;
+                        }
+                        //Penyertaan Non Koperasi
+                        if($neraca->id_akun == 30){
+                            $penyertaannon = $penyertaannon + $neraca->nominal;
+                        }
+                        //Aktiva Lancar lain
+                        if($neraca->id_akun == 31){
+                            $aktivalancarlain = $aktivalancarlain + $neraca->nominal;
+                        }
+                        //Tanah
+                        if($neraca->id_akun == 32){
+                            $tanah = $tanah + $neraca->nominal;
+                        }
+                        //Bangunan
+                        if($neraca->id_akun == 33){
+                            $bangunan = $bangunan + $neraca->nominal;
+                        }
+                        //Kendaraan
+                        if($neraca->id_akun == 34){
+                            $kendaraan = $kendaraan + $neraca->nominal;
+                        }
+                        //Perlengkapan
+                        if($neraca->id_akun == 4){
+                            $perlengkapan = $perlengkapan + $neraca->nominal;
+                        }
+                        //Perlengkapan
+                        if($neraca->id_akun == 4){
+                            $perlengkapan = $perlengkapan + $neraca->nominal;
+                        }
+                        //Peralatan Kantor
+                        if($neraca->id_akun == 5){
+                            $peralatankantor = $peralatankantor + $neraca->nominal;
+                        }
+                        //Inventaris Lain
+                        if($neraca->id_akun == 35){
+                            $inventarislain = $inventarislain + $neraca->nominal;
+                        }
+                        //Penyusutan Aktiva
+                        if($neraca->id_akun == 6){
+                            $penyusutanaktiva = $penyusutanaktiva + $neraca->nominal;
+                        }
+                        //Aktiva Tetap Lain
+                        if($neraca->id_akun == 36){
+                            $aktivatetaplain = $aktivatetaplain + $neraca->nominal;
+                        }
+                        //Biaya Pra Operasional
+                        if($neraca->id_akun == 37){
+                            $praoperasional = $praoperasional + $neraca->nominal;
+                        }
+                        //Amor Biaya Operasional
+                        if($neraca->id_akun == 38){
+                            $amorbiaya = $amorbiaya + $neraca->nominal;
+                        }
+                        //Rupa Aktiva Lain
+                        if($neraca->id_akun == 39){
+                            $rupaaktiva = $rupaaktiva + $neraca->nominal;
+                        }
                     }
                 }
                 //Total SHU
@@ -172,9 +264,17 @@ class KesehatanKoperasiController extends Controller
                 $totalpasiva = $hutanglancar + $hutangjangkapanjang + $ekuitas;
                 //Total Modal
                 $totalmodal = $simpananpokok + $simpananwajib + $sumbangan + $cadangan + $cadanganres + $penyertaan + $simpanankhusus + $penyetaraan + $shutotal;
-                
+                $totalmodal2 = $simpananpokok + $simpananwajib + $sumbangan + $cadangan + (($cadanganres * 50) / 100) + $penyertaan + $simpanankhusus + $penyetaraan;
+                $aktivatertimbang = $pinjamanang + $pinjamannon + $piutanglain + (($penyisihanpiutang * 50) / 100) + (($suratberharga * 50) / 100) + $premi + (($sewadibayar * 50) / 100) + $penyertaankop + $penyertaannon + (($aktivalancarlain * 50) / 100) + (($tanah * 70) / 100) + (($bangunan * 70) / 100) + (($kendaran * 70) / 100) + (($perlengkapan * 70) / 100) + (($peralatankantor * 70) / 100) + (($inventarislain * 70) / 100) + (($penyusutanaktiva * 70) / 100) + (($aktivatetaplain * 70) / 100) + (($praoperasional * 50) / 100) + (($amorbiaya * 50) / 100) + (($rupaaktiva * 50) / 100);
+                $pinjamanberesiko = 1;
             //II. HITUNG PENILAIAN KUALITAS AKTIVA PRODUKTIF
+                $aktivaproduktif1 = ($pinjamanang / ($pinjamanang + $pinjamannon)) * 100;
+                //Status Pinjaman Nasabah 
+                $pinjamankrglancar = 1; $pinjamandiragukan = 1; $pinjamanmacet = 1;
 
+                $aktivaproduktif2 = ((($pinjamankrglancar * 0.5) + ($pinjamandiragukan * 0.75) + $pinjamanmacet) / ($pinjamanang + $pinjamannon)) * 100;
+                $aktivaproduktif3 = ((($penyisihanpiutang * -1) + $cadanganres) / (($pinjamankrglancar * 0.5) + ($pinjamandiragukan * 0.75) + $pinjamanmacet)) * 100; 
+                $aktivaproduktif4 = ($pinjamanberesiko / ($pinjamanang + $pinjamannon)) * 100;
             //III. HITUNG PENILAIAN MANAJEMEN
                 $daftarkuesioner = NilaiKuesioner::where('id_users',$iduser)->get();
                 $aspek1 = 0; $aspek2 = 0; $aspek3 = 0; $aspek4 = 0; $aspek5 = 0;
@@ -195,7 +295,6 @@ class KesehatanKoperasiController extends Controller
                         $aspek5 = $aspek5 + 1;
                     }
                 }
-                
             //IV. HITUNG PENILAIAN EFISIENSI
 
             //V. HITUNG PENILAIAN LIKUIDITAS
@@ -231,8 +330,7 @@ class KesehatanKoperasiController extends Controller
                         $simpanaspek->skor = ($nilaikredit * $aspek->bobot) / 100;
                     }
                     if($aspek->id == 2){
-                        $resiko = 1;
-                        $persentase = ($totalmodal / $resiko) * 100;
+                        $persentase = ($totalmodal / $pinjamanberesiko) * 100;
                         $simpanaspek->persen = $persentase;
                         if($persentase < 20 ){
                             $nilaikredit = 25;
@@ -244,6 +342,99 @@ class KesehatanKoperasiController extends Controller
                             $nilaikredit = 100;
                         }
                         else if($persentase > 100 ){
+                            $nilaikredit = 100;
+                        }
+                        $simpanaspek->nilaikredit = $nilaikredit;
+                        $simpanaspek->skor = ($nilaikredit * $aspek->bobot) / 100;
+                    }
+                    if($aspek->id == 3){
+                        $persentase = ($totalmodal2 / $aktivatertimbang) * 100;
+                        $simpanaspek->persen = $persentase;
+                        if($persentase <= 4 ){
+                            $nilaikredit = 0;
+                        }
+                        else if($persentase <= 6 ){
+                            $nilaikredit = 50;
+                        }
+                        else if($persentase <= 8 ){
+                            $nilaikredit = 75;
+                        }
+                        else if($persentase > 8 ){
+                            $nilaikredit = 100;
+                        }
+                        $simpanaspek->nilaikredit = $nilaikredit;
+                        $simpanaspek->skor = ($nilaikredit * $aspek->bobot) / 100;
+                    }
+                    if($aspek->id == 4){
+                        $persentase = $aktivaproduktif1;
+                        $simpanaspek->persen = $persentase;
+                        if($persentase <= 25 ){
+                            $nilaikredit = 0;
+                        }
+                        else if($persentase <= 50 ){
+                            $nilaikredit = 50;
+                        }
+                        else if($persentase <= 75 ){
+                            $nilaikredit = 75;
+                        }
+                        else if($persentase > 75 ){
+                            $nilaikredit = 100;
+                        }
+                        $simpanaspek->nilaikredit = $nilaikredit;
+                        $simpanaspek->skor = ($nilaikredit * $aspek->bobot) / 100;
+                    }
+                    if($aspek->id == 5){
+                        $persentase = number_format($aktivaproduktif2,2);
+                        $simpanaspek->persen = $persentase;
+                        if($persentase > 45 ){
+                            $nilaikredit = 0;
+                        }
+                        else if($persentase > 40 ){
+                            $nilaikredit = 10;
+                        }
+                        else if($persentase > 30 ){
+                            $nilaikredit = 20;
+                        }
+                        else if($persentase > 20 ){
+                            $nilaikredit = 40;
+                        }
+                        else if($persentase > 10 ){
+                            $nilaikredit = 60;
+                        }
+                        else if($persentase > 0 ){
+                            $nilaikredit = 80;
+                        }
+                        else{
+                            $nilaikredit = 100;
+                        }
+                        $simpanaspek->nilaikredit = $nilaikredit;
+                        $simpanaspek->skor = ($nilaikredit * $aspek->bobot) / 100;
+                    }
+                    if($aspek->id == 6){
+                        $persentase = number_format($aktivaproduktif3,2,",",".");
+                        $simpanaspek->persen = $persentase;
+                        if($persentase > 100 ){
+                            $nilaikredit = 100;
+                        }
+                        else{
+                            $nilaikredit = 0;
+                        }
+                        $simpanaspek->nilaikredit = $nilaikredit;
+                        $simpanaspek->skor = ($nilaikredit * $aspek->bobot) / 100;
+                    }
+                    if($aspek->id == 7){
+                        $persentase = number_format($aktivaproduktif4,2);
+                        $simpanaspek->persen = $persentase;
+                        if($persentase > 30 ){
+                            $nilaikredit = 25;
+                        }
+                        else if($persentase > 26 ){
+                            $nilaikredit = 50;
+                        }
+                        else if($persentase > 21 ){
+                            $nilaikredit = 75;
+                        }
+                        else{
                             $nilaikredit = 100;
                         }
                         $simpanaspek->nilaikredit = $nilaikredit;

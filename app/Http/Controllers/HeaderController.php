@@ -23,7 +23,7 @@ class HeaderController extends Controller
      */
     public function index()
     {
-        $daftarheader = Header::orderBy('id', 'asc')->paginate(50);
+        $daftarheader = Header::orderBy('kode_header', 'asc')->paginate(50);
         $jumlahheader = Header::count();
         return view('header.index', compact('daftarheader','jumlahheader'));
     }

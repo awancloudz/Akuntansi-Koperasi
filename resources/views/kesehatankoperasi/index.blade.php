@@ -15,10 +15,10 @@
 			<tr>
 				<th>Aspek</th>
 				<td align="center"><b>Nama Komponen</td>
-				<th>Persentase</th>
-				<th>Nilai Kredit</th>
-				<th>Bobot Penilaian</th>
-				<th>Skor</th>
+				<td align="center"><b>Perhitungan</td>
+				<td align="center"><b>Nilai Kredit</td>
+				<td align="center"><b>Bobot Penilaian</td>
+				<td align="center"><b>Skor</td>
 				<!-- <th>Action</th> -->
 			</tr>
 		</thead>

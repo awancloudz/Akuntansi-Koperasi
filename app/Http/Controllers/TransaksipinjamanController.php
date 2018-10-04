@@ -153,7 +153,7 @@ class TransaksipinjamanController extends Controller
         //Transaksi kas
         $transaksisemua = New TransaksiSemua;
         $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id."-KAS";
-        $transaksisemua->id_akun = $transaksipinjaman->id_akun;
+        $transaksisemua->id_akun = 13;
         $transaksisemua->id_jurnalumum = $kodejurnal->id;
         $transaksisemua->tanggal = $request->tanggal_bayar;
         $transaksisemua->nominal = $angsuran->total_bayar;
@@ -165,7 +165,7 @@ class TransaksipinjamanController extends Controller
         //Transaksi Semua
         $transaksisemua = New TransaksiSemua;
         $transaksisemua->kodetransaksi = $transaksipinjaman->kodetransaksi."-".$angsuran->id;
-        $transaksisemua->id_akun = $transaksipinjaman->id_akun;
+        $transaksisemua->id_akun = 13;
         $transaksisemua->id_jurnalumum = $kodejurnal->id;
         $transaksisemua->tanggal = $request->tanggal_bayar;
         $transaksisemua->nominal = $angsuran->total_bayar;
